@@ -1,5 +1,7 @@
 <template>
-  <LoginForm />
+    <v-container class="loginpage">
+        <LoginForm />
+    </v-container>
 </template>
 
 <script>
@@ -12,3 +14,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.loginpage {
+    /** background-color: green; */
+    color: black;
+}
+</style>
