@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to COVID On-Flight"/>
+    <HelloWorld msg="asdfWelcome to COVID On-Flight"/>
   </div>
 </template>
 
