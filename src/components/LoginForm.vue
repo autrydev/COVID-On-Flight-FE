@@ -76,7 +76,7 @@
 <style scoped>
 #loginform {
     margin-top: 10%;
-    width: min(50%, 500px);
+    width: min(90%, 500px);
 }
 h1 {
     text-align: center;
