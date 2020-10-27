@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 
 import Home from '../views/Home.vue'
 import UserSignup from '../views/UserSignup.vue'
-import AdminSignup from '../views/AdminSignup.vue'
 import Login from '../views/Login.vue'
 
 Vue.use(VueRouter)
