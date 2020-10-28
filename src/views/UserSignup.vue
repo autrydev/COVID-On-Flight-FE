@@ -16,7 +16,7 @@ export default {
 </script>
 
 <style scoped>
-.loginpage {
+.signuppage {
     /** background-color: green; */
     color: black;
 }

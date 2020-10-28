@@ -6,9 +6,29 @@
             </div>
             <v-form v-model="valid">
                 <v-row>
+                    <v-col id="first-name">
+                        <v-text-field
+                        v-model="firstName"
+                        :rules="[firstNameRules.required]"
+                        label="First Name *"
+                        outlined
+                        required
+                        ></v-text-field>
+                    </v-col>
+                    <v-col id="last-name">
+                        <v-text-field
+                        v-model="lastName"
+                        :rules="[lastNameRules.required]"
+                        label="Last Name *"
+                        outlined
+                        required
+                        ></v-text-field>
+                    </v-col>
+                </v-row>
+                <v-row>
                     <v-text-field
                     v-model="email"
-                    :rules="emailRules"
+                    :rules="[emailRules.required, emailRules.valid]"
                     label="Email Address *"
                     outlined
                     required
@@ -16,9 +36,9 @@
                 </v-row>
                 <v-row>
                     <v-text-field
-                    v-model="password"
+                    v-model="password1"
                     :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                    :rules="passRules"
+                    :rules="[pass1Rules.required]"
                     :type="show1 ? 'text' : 'password'"
                     label="Password *"
                     outlined
@@ -27,20 +47,32 @@
                     ></v-text-field>
                 </v-row>
                 <v-row>
+                    <v-text-field
+                    v-model="password2"
+                    :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                    :rules="[pass2Rules.required, checkPasswords]"
+                    :type="show2 ? 'text' : 'password'"
+                    label="Retype Password *"
+                    outlined
+                    required
+                    @click:append="show2 = !show2"
+                    ></v-text-field>
+                </v-row>
+                <v-row>
                 <v-btn
                 :disabled="!valid"
-                class="btn-signin"
+                id="btn-signup"
                 @click="validate"
                 >
-                SIGN IN
+                SIGN UP
                 </v-btn>
                 </v-row>
                 <v-row>
                     <v-col>
-                    <router-link to="/forgot-password">Forgot Password?</router-link>
+                    <router-link to="/forgot-password" class="link">Forgot Password?</router-link>
                     </v-col>
                     <v-col cols=auto>
-                    <router-link to="/signup-u">Don't have an account? Sign Up</router-link>
+                    <router-link to="/login" class="link">Already have an account? Sign in</router-link>
                     </v-col>
                 </v-row>
             </v-form>
@@ -58,37 +90,67 @@
   export default {
 
     data: () => ({
-      valid: false,
-      show1: false,
-      email: '',
-      emailRules: [
-        v => !!v || 'Email address is required',
-        v => /.+@.+/.test(v) || 'Email address must be valid',
-      ],
-      password: '',
-      passRules: [
-          v => !!v || 'Password is required',
-      ]
-    }),
+        valid: false,
+        show1: false,
+        show2: false,
+        firstName: '',
+        firstNameRules: {
+            required: v => !!v || 'First name is required', /*If value is falsey (empty string), then output message*/
+        },
+        lastName: '',
+        lastNameRules: {
+            required: v => !!v || 'Last name is required',
+        },
+        email: '',
+        emailRules: {
+            required: v => !!v || 'Email address is required',
+            valid: v => /.+@.+/.test(v) || 'Email address must be valid',
+        },
+        password1: '',
+        pass1Rules: {
+            required: v => !!v || 'Password is required',
+        },
+        password2: '',
+        pass2Rules: {
+            required: v => !!v || 'Retyping your password is required',
+        }
+        }),
+    computed: {
+        checkPasswords() {
+            return this.password1 === this.password2 || 'Passwords must match';
+        },
+    }
   };
 </script>
 
 <style scoped>
 #signupform {
-    margin-top: 10%;
+    margin-top: 5%;
     width: min(50%, 500px);
 }
 h1 {
     text-align: center;
     padding-bottom: 1em;
 }
-.btn-signin {
+#first-name {
+    padding-left: 0;
+}
+#last-name {
+    padding-right: 0;
+}
+#btn-signup {
     width: 100%;
+    height: 4em;
+    margin-bottom: 1em;
+    background-color: rgb(255, 136, 0);
 }
 p {
     padding-top: 5em;
 }
 #copyright {
     text-align: center;
+}
+.link {
+    text-decoration: none;
 }
 </style>

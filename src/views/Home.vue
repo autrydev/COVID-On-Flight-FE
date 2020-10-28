@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <HelloWorld />
+    <HelloWorld msg="Welcome to COVID On-Flight"/>
+    <v-row> <router-link to="/login">Login</router-link> </v-row>
+    <v-row> <router-link to="/signup">Sign up</router-link> </v-row>
   </div>
 </template>
 

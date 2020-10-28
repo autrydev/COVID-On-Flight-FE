@@ -40,7 +40,7 @@
                     <router-link to="/forgot-password">Forgot Password?</router-link>
                     </v-col>
                     <v-col cols=auto>
-                    <router-link to="/signup-u">Don't have an account? Sign Up</router-link>
+                    <router-link to="/signup">Don't have an account? Sign Up</router-link>
                     </v-col>
                 </v-row>
             </v-form>
@@ -76,7 +76,7 @@
 <style scoped>
 #loginform {
     margin-top: 10%;
-    width: min(50%, 500px);
+    width: min(90%, 500px);
 }
 h1 {
     text-align: center;
