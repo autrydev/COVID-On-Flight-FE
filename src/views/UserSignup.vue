@@ -17,7 +17,8 @@ export default {
 
 <style scoped>
 .signuppage {
-    /** background-color: green; */
     color: black;
+    width: 100%;
+    height: 100%;
 }
 </style>
