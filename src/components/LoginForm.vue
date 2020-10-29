@@ -40,7 +40,7 @@
                     <router-link to="/forgot-password">Forgot Password?</router-link>
                     </v-col>
                     <v-col cols=auto>
-                    <router-link to="/signup-u">Don't have an account? Sign Up</router-link>
+                    <router-link to="/signup">Don't have an account? Sign Up</router-link>
                     </v-col>
                 </v-row>
             </v-form>
