@@ -8,6 +8,7 @@
                 <v-row>
                     <v-text-field
                     v-model="email"
+                    :dark = true
                     :rules="emailRules"
                     label="Email Address *"
                     outlined
@@ -17,6 +18,7 @@
                 <v-row>
                     <v-text-field
                     v-model="password"
+                    :dark = true
                     :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                     :rules="passRules"
                     :type="show1 ? 'text' : 'password'"
@@ -28,6 +30,7 @@
                 </v-row>
                 <v-row>
                 <v-btn
+                :dark = true
                 :disabled="!valid"
                 class="btn-signin"
                 @click="validate"
@@ -81,6 +84,7 @@
 h1 {
     text-align: center;
     padding-bottom: 1em;
+    color:white;
 }
 .btn-signin {
     width: 100%;
