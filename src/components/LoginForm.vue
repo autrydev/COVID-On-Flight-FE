@@ -84,13 +84,19 @@
 h1 {
     text-align: center;
     padding-bottom: 1em;
-    color:white;
+    color:rgb(219, 214, 214);
 }
 .btn-signin {
     width: 100%;
+    height: 4em;
+    min-height: 4em;
+    margin-bottom: 1em;
+    background-color: #1976d2;
+    outline-color: goldenrod;
 }
 p {
     padding-top: 5em;
+    color: rgb(219, 214, 214);
 }
 #copyright {
     text-align: center;
