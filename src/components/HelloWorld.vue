@@ -1,5 +1,7 @@
 <template>
   <div class="hello">
+    <h1>{{ test }}</h1>
+    <h2>{{ran}}</h2>
     <ul v-if="posts && posts.length">
       <li v-for="post of posts" v-bind:key="post">
         <p><strong>{{post.title}}</strong></p>
@@ -28,7 +30,9 @@ export default {
     return {
       posts: [],
       errors: [],
-      todo: {}
+      todo: {},
+      test: null,
+      ran: false
     }
   },
 
@@ -37,11 +41,11 @@ export default {
       .then(response => {
         // JSON responses are automatically parsed.
         this.posts = response.data
+        console.log('hey')
       })
       .catch(e => {
         this.errors.push(e)
       })
-
       axios.get(`http://jsonplaceholder.typicode.com/todos/1`)
       .then(response => {
         // JSON responses are automatically parsed.
@@ -49,6 +53,16 @@ export default {
       })
       .catch(e => {
         this.errors.push(e)
+      })
+      axios.get(`http://127.0.0.1:8000`)
+      .then(response => {
+        // JSON responses are automatically parsed.
+        console.log(response.data)
+        this.test = response.data
+        this.ran = true
+      })
+      .catch(e => {
+        console.log(e)
       })
   },
 }

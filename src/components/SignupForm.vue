@@ -132,8 +132,6 @@
 </script>
 
 <style scoped>
-#container {
-}
 #signup-card {
     width: min(50%, 500px);
     background-color: #1c1e1f;
