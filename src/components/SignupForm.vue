@@ -1,6 +1,5 @@
 <template>
     <div id="container">
-        <v-card :elevation="20" id="signup-card">
             <v-container id="signup-form">
                 <div>
                     <h1>COVID On-Flight</h1>
@@ -89,7 +88,6 @@
                     </v-col>
                 </v-row>
             </v-container>
-        </v-card>
     </div>
 </template>
 
@@ -132,14 +130,10 @@
 </script>
 
 <style scoped>
-#signup-card {
-    width: min(50%, 500px);
-    background-color: #1c1e1f;
-}
 #signup-form {
     margin-top: 5%;
     background-color: #1c1e1f;
-    padding: 2em;
+    width: min(50%, 500px);
 }
 h1 {
     text-align: center;
