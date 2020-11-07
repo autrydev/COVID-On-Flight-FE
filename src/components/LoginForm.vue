@@ -3,6 +3,7 @@
         <v-container id="loginform">
             <div>
                 <h1>COVID On-Flight</h1>
+                <h2>{{login_status}}</h2>
             </div>
             <v-form v-model="valid">
                 <v-row>
@@ -30,6 +31,7 @@
                 </v-row>
                 <v-row>
                 <v-btn
+                v-on:click="login"
                 :dark = true
                 :disabled="!valid"
                 class="btn-signin"
@@ -57,22 +59,43 @@
 </template>
 
 <script>
+import axios from 'axios'
 
-  export default {
+export default {
 
     data: () => ({
-      valid: false,
-      show1: false,
-      email: '',
-      emailRules: [
+        valid: false,
+        show1: false,
+        email: '',
+        emailRules: [
         v => !!v || 'Email address is required',
         v => /.+@.+/.test(v) || 'Email address must be valid',
-      ],
-      password: '',
-      passRules: [
-          v => !!v || 'Password is required',
-      ]
+        ],
+        password: '',
+        passRules: [
+            v => !!v || 'Password is required',
+        ],
+        login_status: 'Not Logged In'
     }),
+    methods: {
+        login: function() {
+            console.log(this.email)
+            console.log(this.password)
+            this.login_status = 'Button clicked'
+            axios.post(`http://localhost:8000/login`, {
+                email: this.email,
+                password: this.password
+            })
+            .then(response => {
+            // JSON responses are automatically parsed.
+            console.log(response.data)
+            this.login_status = response.data
+            })
+            .catch(e => {
+                console.log(e)
+            })
+        }
+    }
   };
 </script>
 
