@@ -3,7 +3,6 @@
         <v-container id="loginform">
             <div>
                 <h1>COVID On-Flight</h1>
-                <h2>{{login_status}}</h2>
             </div>
             <v-form v-model="valid">
                 <v-row>
@@ -28,6 +27,11 @@
                     required
                     @click:append="show1 = !show1"
                     ></v-text-field>
+                </v-row>
+                <v-row id="status" v-if="logged_in">
+                    <v-col>
+                        <p id="loginmessage">{{login_message}}</p>
+                    </v-col>
                 </v-row>
                 <v-row>
                 <v-btn
@@ -60,6 +64,7 @@
 
 <script>
 import axios from 'axios'
+import router from '../router'
 
 export default {
 
@@ -75,13 +80,13 @@ export default {
         passRules: [
             v => !!v || 'Password is required',
         ],
-        login_status: 'Not Logged In'
+        login_message: 'Not Logged In',
+        logged_in: false
     }),
     methods: {
         login: function() {
             console.log(this.email)
             console.log(this.password)
-            this.login_status = 'Button clicked'
             axios.post('/login', {
                 email: this.email,
                 password: this.password
@@ -89,7 +94,14 @@ export default {
             .then(response => {
             // JSON responses are automatically parsed.
             console.log(response.data)
-            this.login_status = response.data
+            if(response.data == "Valid User")
+            {
+                localStorage.user = '1234'
+                router.push('dashboard')
+            }
+            else
+                this.login_message = response.data
+            this.logged_in = true
             })
             .catch(e => {
                 console.log(e)
@@ -103,6 +115,20 @@ export default {
 #loginform {
     margin-top: 10%;
     width: min(90%, 500px);
+}
+#status{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    text-align: center;
+}
+#loginmessage {
+    color: #f44336;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 h1 {
     text-align: center;
