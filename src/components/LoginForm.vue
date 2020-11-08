@@ -82,7 +82,7 @@ export default {
             console.log(this.email)
             console.log(this.password)
             this.login_status = 'Button clicked'
-            axios.post(`http://localhost:8000/login`, {
+            axios.post('/login', {
                 email: this.email,
                 password: this.password
             })

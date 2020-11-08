@@ -50,6 +50,8 @@ export default {
       .catch(e => {
         this.errors.push(e)
       })
+
+      console.log(`${process.env.VUE_APP_MODE}`)
   },
 }
 </script>
