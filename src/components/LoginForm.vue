@@ -96,7 +96,7 @@ export default {
             console.log(response.data)
             if(response.data == "Valid User")
             {
-                localStorage.user = '1234'
+                localStorage.user = response.data
                 router.push('dashboard')
             }
             else
