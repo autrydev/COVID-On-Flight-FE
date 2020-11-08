@@ -22,12 +22,7 @@
                     with Google Firebase authentication
                 </blockquote>
             </v-flex>
-            <v-flex xs12 sm6 offset-sm2 class="text-xs-center" mt-5>
-                <v-btn to="/dashboard">Dashboard<v-icon>mdi-history</v-icon></v-btn>
-                <v-btn to="/covid19informaion">Covid-19 Information<v-icon>mdi-heart</v-icon></v-btn>
-                <v-btn to="/mycovidstatus">My Covid Status <v-icon>mdi-alert</v-icon></v-btn>
-                <v-btn color="primary" to="/accountsettings">Account Settings<v-icon>mdi-account-edit</v-icon></v-btn>
-            </v-flex>
+
 
         </v-layout>
     </v-container>

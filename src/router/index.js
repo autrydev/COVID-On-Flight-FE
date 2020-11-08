@@ -9,6 +9,7 @@ import CovidInfo from '../views/CovidInfo.vue'
 import MyCovidStatus from '../views/MyCovidStatus.vue'
 import AccountSettings from '../views/AccountSettings.vue'
 
+
 Vue.use(VueRouter)
 
 const routes = [

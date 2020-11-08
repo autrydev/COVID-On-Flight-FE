@@ -11,26 +11,7 @@
             <v-btn class="white--text" color="#2962FF" elevation="5" to="/accountsettings" x-large >Account Settings<v-icon>mdi-account-edit</v-icon></v-btn>
         </v-flex>
     </v-container>
-    <v-container fluid>
-        <v-layout row wrap>
-            <v-flex xs12 class="text-xl-center" mt-5>
-                <h1>User Dashboard</h1>
-            </v-flex>
-            <v-flex xs12 sm6 offset-sm3 mt-3>
-                <blockquote class="blockquote text-xs-center">
-                    It's a basic Single Page application <br>
-                    with Google Firebase authentication
-                </blockquote>
-            </v-flex>
-            <v-flex xs12 sm6 offset-sm2 class="text-xs-center" mt-5>
-                <v-btn to="/dashboard">Dashboard<v-icon>mdi-history</v-icon></v-btn>
-                <v-btn to="/covid19informaion">Covid-19 Information<v-icon>mdi-heart</v-icon></v-btn>
-                <v-btn to="/mycovidstatus">My Covid Status <v-icon>mdi-alert</v-icon></v-btn>
-                <v-btn color="primary" to="/accountsettings">Account Settings<v-icon>mdi-account-edit</v-icon></v-btn>
-            </v-flex>
 
-        </v-layout>
-    </v-container>
 
 
   </v-top-navigation>
