@@ -99,14 +99,7 @@
             cols="12"
             md="4"
           >
-            <v-btn
-      :disabled="!valid"
-      color="success"
-      class="mr-4"
-      @click="validate"
-    >
-      Validate
-    </v-btn>
+
 
         <v-btn color="green" type="submit">Submit</v-btn>
           </v-col>
@@ -120,14 +113,15 @@
 export default {
     data(){
         return {
-        firstname:null,
+        FlightNumber:null,
         email:null,
         lastname:null,
         }
     },
     methods:{
     submit(){
-        console.log('Email is ${this.email} and Name is ${this.firstname} and Surname is ${this.lastname}')
+        console.log('Flight is ' + this.FlightNumber)
+        //Look at useradmin branch for how to bring this to backend look at vscode for download
     }
     }
 }
