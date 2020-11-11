@@ -1,102 +1,82 @@
 <template>
-  <v-top-navigation
-    :value="value"
-    color="primary"
-  >
-    <v-container fluid>
-        <v-flex xs12 class="text-xl-center" mt-5>
-            <v-btn to="/dashboard"  x-large outlined> Dashboard<v-icon>mdi-history</v-icon></v-btn>
-            <v-btn to="/covid19informaion" x-large outlined>COVID-19 Information<v-icon>mdi-heart</v-icon></v-btn>
-            <v-btn class="white--text" color="#2962FF" to="/mycovidstatus" elevation="5" x-large>My Covid Status<v-icon>mdi-alert</v-icon></v-btn>
-            <v-btn to="/accountsettings" x-large outlined >Account Settings<v-icon>mdi-account-edit</v-icon></v-btn>
-        </v-flex>
+  <div id="container">
+    <v-container id="status-form">
+      <v-form v-model="valid" :readonly="true" ref="form">
+        <v-row>
+          <v-col cols="4">
+            <v-subheader :dark="true" class="prefix">Current Status</v-subheader>
+          </v-col>
+          <v-col cols="6" class="text-box">
+            <v-text-field
+              v-model="currentStatus"
+              :dark="true"
+              placeholder="FETCH_CURRENT_STATUS"
+              outlined
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="4">
+            <v-subheader :dark="true" class="prefix">Date Last Updated</v-subheader>
+          </v-col>
+          <v-col cols="6" class="text-box">
+            <v-text-field
+              v-model="date_lastUpdate"
+              :dark="true"
+              placeholder="FETCH_LAST_NAME"
+              outlined
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="4">
+            <v-subheader :dark="true" class="prefix">Date Last Flight</v-subheader>
+          </v-col>
+          <v-col cols="6" class="text-box">
+            <v-text-field
+              v-model="date_lastFlight"
+              :dark="true"
+              placeholder="FETCH_EMAIL"
+              outlined
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-btn :dark="true" id="update-status" @click="redirect()">Update My Status</v-btn>
+          </v-col>
+        </v-row>
+      </v-form>
     </v-container>
-
-
-
-  </v-top-navigation>
+  </div>
 </template>
+
+
 <script>
 
   export default {
 
     data: () => ({
         valid: false,
-        show1: false,
-        show2: false,
-        firstName: '',
-        firstNameRules: {
-            required: v => !!v || 'First namasdsade is required', /*If value is falsey (empty string), then output message*/
-        },
-        lastName: '',
-        lastNameRules: {
-            required: v => !!v || 'Last name is required',
-        },
-        email: '',
-        emailRules: {
-            required: v => !!v || 'Email address is required',
-            valid: v => /.+@.+/.test(v) || 'Email address must be valid',
-        },
-        password1: '',
-        pass1Rules: {
-            required: v => !!v || 'Password is required',
-        },
-        password2: '',
-        pass2Rules: {
-            required: v => !!v || 'Retyping your password is required',
+    }),
+    methods: {
+        redirect() {
+            //router.push("/takesurvey");
         }
-        }),
-    computed: {
-        checkPasswords() {
-            return this.password1 === this.password2 || 'Passwords must match';
-        },
     }
   };
 </script>
 
 <style scoped>
-#container {
+#status-form {
+  margin-top: 5%;
+  background-color: #1c1e1f;
+  width: min(50%, 500px);
 }
-#signup-card {
-    width: min(50%, 500px);
-    background-color: #FFFFFF;
-}
-#signup-form {
-    margin-top: 5%;
-    background-color: #FFFFFF;
-    padding: 2em;
-}
-h1 {
-    text-align: center;
-    padding-bottom: 1em;
-    color: rgb(219, 214, 214);
-}
-#names {
-    padding-bottom: 0;
-    margin-bottom: 0;
-    height: 100px;
-}
-#first-name {
-    padding-left: 0;
-}
-#last-name {
-    padding-right: 0;
-    padding-bottom: 0;
-}
-#btn-signup {
-    width: 100%;
-    height: 4em;
-    margin-bottom: 1em;
-    background-color: rgb(255, 136, 0);
-}
-p {
-    padding-top: 5em;
-    color: rgb(219, 214, 214);
-}
-#copyright {
-    text-align: center;
-}
-.link {
-    text-decoration: none;
+#update-status {
+  width: 100%;
+  height: 4em;
+  margin-bottom: 1em;
+  background-color: rgb(7, 61, 161);
 }
 </style>

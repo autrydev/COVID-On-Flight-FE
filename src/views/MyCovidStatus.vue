@@ -1,23 +1,29 @@
 <template>
-    <v-container class="MyCovidStatusdpage">
+    <v-container class="MyCovidStatuspage">
+        <MyCovidStatusHeader></MyCovidStatusHeader>
         <MyCovidStatusForm />
+        <app-footer></app-footer>
     </v-container>
 </template>
 
 <script>
 import MyCovidStatusForm from '@/components/MyCovidStatusForm.vue'
+import AppFooter from "@/components/AppFooter.vue";
+import MyCovidStatusHeader from "@/components/MyCovidStatusHeader";
 
 export default {
   name: 'MyCovidStatus',
   components: {
-    MyCovidStatusForm
+    MyCovidStatusForm,
+    AppFooter,
+    MyCovidStatusHeader,
   }
 }
 </script>
 
 <style scoped>
-.dashboardpage {
+.MyCovidStatuspage {
     /** background-color: green; */
-    color: white;
+    background-color: #1c1e1f;
 }
 </style>
