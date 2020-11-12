@@ -1,10 +1,10 @@
 <template>
   <div>
   <p> </p>
-    <p class="font-weight-black text-center">
+    <p class="font-weight-black text-center pa-md-5">
       Important Information About COVID-19
     </p>
-    <p class="font-weight-black text-center">
+    <p class="font-weight-black text-center pa-md-3">
       The following information was taken from the Centers of Disease Control and Prevention:
     </p>
     <p class="font-weight-medium text-center">
