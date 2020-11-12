@@ -166,6 +166,7 @@
 </script>
 
 <style scoped>
+
 #signup-form {
     margin-top: 5%;
     background-color: #1c1e1f;

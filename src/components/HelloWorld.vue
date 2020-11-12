@@ -54,16 +54,10 @@ export default {
       .catch(e => {
         this.errors.push(e)
       })
-      axios.get(`http://127.0.0.1:8000`)
-      .then(response => {
-        // JSON responses are automatically parsed.
-        console.log(response.data)
-        this.test = response.data
-        this.ran = true
-      })
-      .catch(e => {
-        console.log(e)
-      })
+
+
+      console.log(`${process.env.VUE_APP_MODE}`)
+
   },
 }
 </script>
