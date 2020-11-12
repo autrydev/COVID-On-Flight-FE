@@ -1,7 +1,6 @@
 <template>
 
  <v-toolbar color = "indigo" dark>
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
     <v-toolbar-title class="white--text">Covid-19 Information</v-toolbar-title>
 
