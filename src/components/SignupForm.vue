@@ -30,7 +30,7 @@
                             ></v-text-field>
                         </v-col>
                     </v-row>
-                    <v-row>
+                    <v-row class="text-field">
                         <v-text-field
                         v-model="email"
                         :rules="[emailRules.required, emailRules.valid]"
@@ -40,7 +40,7 @@
                         required
                         ></v-text-field>
                     </v-row>
-                    <v-row>
+                    <v-row class="text-field">
                         <v-text-field
                         v-model="password1"
                         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -53,7 +53,7 @@
                         @click:append="show1 = !show1"
                         ></v-text-field>
                     </v-row>
-                    <v-row>
+                    <v-row class="text-field">
                         <v-text-field
                         v-model="password2"
                         :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -70,6 +70,7 @@
                     <v-btn
                     :dark = true
                     :disabled="!valid"
+                    :loading="submitted"
                     id="btn-signup"
                     @click="validate"
                     v-on:click="signup"
@@ -96,6 +97,8 @@
 </template>
 
 <script>
+  import axios from 'axios'
+  import router from '../router'
 
   export default {
 
@@ -127,19 +130,14 @@
         phoneNumber: '',
         signup_error_message: "A user with that email already exists",
         signup_error: false,
+        submitted: false,
     }),
     methods: {
         checkPasswords() {
             return this.password1 === this.password2 || 'Passwords must match';
         },
         signup() {
-            console.log(this.firstName)
-            console.log(this.lastName)
-            console.log(this.email)
-            console.log(this.password1)
-            console.log(this.password2)
-            console.log(this.phoneNumber)
-            /*
+            this.submitted = true;
             axios.post('/signup', {
                 email: this.email,
                 password: this.password1,
@@ -148,18 +146,16 @@
                 phone_number: this.phoneNumber
             })
             .then(response => {
-            // JSON responses are automatically parsed.
-            console.log(response.data)
-            if(response.data == "status 200") {   SUCCESS
-                router.push('login');
-            }
-            else if(response.data == "status 401") ERROR
-                this.signup_error = true;
+                // JSON responses are automatically parsed.
+                if(response.status == 200) {
+                    router.push('login');
+                }
             })
             .catch(e => {
-                console.log(e)
+                console.log(e);
+                this.signup_error = true;
+                this.submitted = false;
             })
-            */
         }
     }
   };
@@ -184,17 +180,19 @@ h1 {
     padding-bottom: 1em;
     color: rgb(219, 214, 214);
 }
+.text-field {
+    padding: 0 0.5em;
+}
 #names {
     padding-bottom: 0;
     margin-bottom: 0;
     height: 100px;
 }
 #first-name {
-    padding-left: 0;
+    padding-left: 0.5em;
 }
 #last-name {
-    padding-right: 0;
-    padding-bottom: 0;
+    padding-right: 0.5em;
 }
 #btn-signup {
     width: 100%;
