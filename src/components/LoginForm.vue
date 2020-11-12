@@ -34,7 +34,7 @@
                     </v-col>
                 </v-row>
                 <v-row>
-                <v-btn to="/dashboard"
+                <v-btn
                 v-on:click="login"
                 :dark = true
                 :disabled="!valid"
@@ -85,15 +85,13 @@ export default {
     }),
     methods: {
         login: function() {
-            console.log(this.email)
-            console.log(this.password)
             axios.post('/login', {
                 email: this.email,
                 password: this.password
             })
             .then(response => {
             // JSON responses are automatically parsed.
-            console.log(response.data)
+            console.log(response.status)
             if(response.data == "Valid User")
             {
                 localStorage.user = response.data
