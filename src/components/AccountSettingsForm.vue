@@ -1,7 +1,7 @@
 <template>
   <div id="container">
     <v-container id="account-settings">
-      <v-form v-model="valid" :disabled="!responsive" ref="form">
+      <v-form v-model="valid" :readonly="!responsive" ref="form">
         <v-row>
           <v-col cols="4">
             <v-subheader :dark="true" class="prefix">First Name</v-subheader>
@@ -10,7 +10,6 @@
             <v-text-field
               v-model="firstName"
               :dark="true"
-              placeholder="FETCH_FIRST_NAME"
               outlined
               :required="responsive"
               :rules="[firstNameRules.required]"
@@ -25,7 +24,6 @@
             <v-text-field
               v-model="lastName"
               :dark="true"
-              placeholder="FETCH_LAST_NAME"
               outlined
               :required="responsive"
               :rules="[lastNameRules.required]"
@@ -40,7 +38,6 @@
             <v-text-field
               v-model="email"
               :dark="true"
-              placeholder="FETCH_EMAIL"
               outlined
               :required="responsive"
               :rules="[emailRules.required, emailRules.valid]"
@@ -55,7 +52,6 @@
             <v-text-field
               v-model="phoneNumber"
               :dark="true"
-              placeholder="FETCH_NUMBER"
               outlined
             ></v-text-field>
           </v-col>
@@ -85,12 +81,12 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data: () => ({
     responsive: false,
     valid: false,
-    show1: false,
-    show2: false,
     firstName: "",
     firstNameRules: {
       required: (v) =>
@@ -120,11 +116,29 @@ export default {
     },
     cancelChanges() {
       this.responsive = false;
-      this.$refs.form.reset();
+      this.fetchAccountInfo();
     },
     checkPasswords() {
       return this.password1 === this.password2 || "Passwords must match";
     },
+    fetchAccountInfo() {
+      axios.post('/accountsettings', {
+                id: localStorage.user
+            })
+            .then(response => {
+              // JSON responses are automatically parsed.
+              this.firstName = response.data["firstName"]
+              this.lastName = response.data["lastName"]
+              this.email = response.data["email"]
+              this.phoneNumber = response.data["phoneNumber"]
+            })
+            .catch(e => {
+                console.log(e)
+            })
+    }
+  },
+  beforeMount() {
+    this.fetchAccountInfo()
   },
 };
 </script>

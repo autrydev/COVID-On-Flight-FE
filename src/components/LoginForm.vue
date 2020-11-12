@@ -38,6 +38,7 @@
                 v-on:click="login"
                 :dark = true
                 :disabled="!valid"
+                :loading="logged_in"
                 class="btn-signin"
                 @click="validate"
                 >
