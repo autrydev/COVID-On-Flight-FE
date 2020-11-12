@@ -1,11 +1,13 @@
 <template>
     <div id="container">
-        <v-card :elevation="20" id="signup-card">
             <v-container id="signup-form">
                 <div>
                     <h1>COVID On-Flight</h1>
                 </div>
                 <v-form v-model="valid">
+                    <v-row v-show="signup_error"> <!--only show if error status 401 returned-->
+                        <p id="signup-error-message">{{signup_error_message}}</p>
+                    </v-row>
                     <v-row id="names">
                         <v-col id="first-name">
                             <v-text-field
@@ -70,6 +72,7 @@
                     :disabled="!valid"
                     id="btn-signup"
                     @click="validate"
+                    v-on:click="signup"
                     >
                     SIGN UP
                     </v-btn>
@@ -89,7 +92,6 @@
                     </v-col>
                 </v-row>
             </v-container>
-        </v-card>
     </div>
 </template>
 
@@ -121,27 +123,60 @@
         password2: '',
         pass2Rules: {
             required: v => !!v || 'Retyping your password is required',
-        }
-        }),
-    computed: {
+        },
+        phoneNumber: '',
+        signup_error_message: "A user with that email already exists",
+        signup_error: false,
+    }),
+    methods: {
         checkPasswords() {
             return this.password1 === this.password2 || 'Passwords must match';
         },
+        signup() {
+            console.log(this.firstName)
+            console.log(this.lastName)
+            console.log(this.email)
+            console.log(this.password1)
+            console.log(this.password2)
+            console.log(this.phoneNumber)
+            /*
+            axios.post('/signup', {
+                email: this.email,
+                password: this.password1,
+                first_name: this.firstName,
+                last_name: this.lastName,
+                phone_number: this.phoneNumber
+            })
+            .then(response => {
+            // JSON responses are automatically parsed.
+            console.log(response.data)
+            if(response.data == "status 200") {   SUCCESS
+                router.push('login');
+            }
+            else if(response.data == "status 401") ERROR
+                this.signup_error = true;
+            })
+            .catch(e => {
+                console.log(e)
+            })
+            */
+        }
     }
   };
 </script>
 
 <style scoped>
-#container {
-}
-#signup-card {
-    width: min(50%, 500px);
-    background-color: #1c1e1f;
-}
 #signup-form {
     margin-top: 5%;
     background-color: #1c1e1f;
-    padding: 2em;
+    width: min(50%, 500px);
+}
+#signup-error-message {
+    color: #f44336;
+    margin-top: 0px;
+    margin-left: 7.5em;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 h1 {
     text-align: center;
