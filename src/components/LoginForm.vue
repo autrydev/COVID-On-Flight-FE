@@ -34,7 +34,7 @@
                     </v-col>
                 </v-row>
                 <v-row>
-                <v-btn
+                <v-btn to="/dashboard"
                 v-on:click="login"
                 :dark = true
                 :disabled="!valid"
