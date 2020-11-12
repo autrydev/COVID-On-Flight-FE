@@ -115,6 +115,7 @@ export default {
 #loginform {
     margin-top: 10%;
     width: min(90%, 500px);
+    background-color: #1c1e1f;
 }
 #status{
     margin-top: 0px;
