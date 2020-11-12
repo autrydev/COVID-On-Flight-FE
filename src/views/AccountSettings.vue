@@ -1,5 +1,6 @@
 <template>
   <v-container class="accountsettingspage">
+    <AuthGuard></AuthGuard>
     <AccountSettingsHeader></AccountSettingsHeader>
     <AccountSettingsForm />
     <app-footer></app-footer>
@@ -7,6 +8,7 @@
 </template>
 
 <script>
+import AuthGuard from '@/components/AuthGuard'
 import AccountSettingsForm from "@/components/AccountSettingsForm.vue";
 import AppFooter from "@/components/AppFooter.vue";
 import AccountSettingsHeader from "@/components/AccountSettingsHeader";
@@ -14,6 +16,7 @@ import AccountSettingsHeader from "@/components/AccountSettingsHeader";
 export default {
   name: "AccountSettings",
   components: {
+    AuthGuard,
     AccountSettingsForm,
     AppFooter,
     AccountSettingsHeader,

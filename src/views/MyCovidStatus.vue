@@ -1,5 +1,6 @@
 <template>
     <v-container class="MyCovidStatuspage">
+        <AuthGuard></AuthGuard>
         <MyCovidStatusHeader></MyCovidStatusHeader>
         <MyCovidStatusForm />
         <app-footer></app-footer>
@@ -7,6 +8,8 @@
 </template>
 
 <script>
+
+import AuthGuard from '@/components/AuthGuard'
 import MyCovidStatusForm from '@/components/MyCovidStatusForm.vue'
 import AppFooter from "@/components/AppFooter.vue";
 import MyCovidStatusHeader from "@/components/MyCovidStatusHeader";
@@ -14,6 +17,7 @@ import MyCovidStatusHeader from "@/components/MyCovidStatusHeader";
 export default {
   name: 'MyCovidStatus',
   components: {
+    AuthGuard,
     MyCovidStatusForm,
     AppFooter,
     MyCovidStatusHeader,

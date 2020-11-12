@@ -92,17 +92,13 @@ export default {
             .then(response => {
             // JSON responses are automatically parsed.
             console.log(response.status)
-            if(response.data == "Valid User")
-            {
                 localStorage.user = response.data
                 router.push('dashboard')
-            }
-            else
-                this.login_message = response.data
-            this.logged_in = true
             })
             .catch(e => {
                 console.log(e)
+                this.login_message = 'Invalid Email/Password'
+                this.logged_in = true;
             })
         }
     }
