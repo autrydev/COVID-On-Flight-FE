@@ -4,12 +4,12 @@
       <v-form v-model="valid" :readonly="true" ref="form">
         <v-row>
           <v-col cols="4">
-            <v-subheader :dark="true" class="prefix">Current Status</v-subheader>
+            <v-subheader :dark="false" class="prefix">Current Status</v-subheader>
           </v-col>
           <v-col cols="6" class="text-box">
             <v-text-field
               v-model="currentStatus"
-              :dark="true"
+              :dark="false"
               placeholder="FETCH_CURRENT_STATUS"
               outlined
             ></v-text-field>
@@ -17,12 +17,12 @@
         </v-row>
         <v-row>
           <v-col cols="4">
-            <v-subheader :dark="true" class="prefix">Date Last Updated</v-subheader>
+            <v-subheader :dark="false" class="prefix">Date Last Updated</v-subheader>
           </v-col>
           <v-col cols="6" class="text-box">
             <v-text-field
               v-model="date_lastUpdate"
-              :dark="true"
+              :dark="false"
               placeholder="FETCH_LAST_NAME"
               outlined
             ></v-text-field>
@@ -30,12 +30,12 @@
         </v-row>
         <v-row>
           <v-col cols="4">
-            <v-subheader :dark="true" class="prefix">Date Last Flight</v-subheader>
+            <v-subheader :dark="false" class="prefix">Date Last Flight</v-subheader>
           </v-col>
           <v-col cols="6" class="text-box">
             <v-text-field
               v-model="date_lastFlight"
-              :dark="true"
+              :dark="false"
               placeholder="FETCH_EMAIL"
               outlined
             ></v-text-field>
@@ -70,7 +70,6 @@
 <style scoped>
 #status-form {
   margin-top: 5%;
-  background-color: #1c1e1f;
   width: min(50%, 500px);
 }
 #update-status {

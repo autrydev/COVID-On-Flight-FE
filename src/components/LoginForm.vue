@@ -8,17 +8,18 @@
                 <v-row>
                     <v-text-field
                     v-model="email"
-                    :dark = true
+                    :dark="false"
                     :rules="emailRules"
                     label="Email Address *"
                     outlined
                     required
+                    @keydown.enter="login"
                     ></v-text-field>
                 </v-row>
                 <v-row>
                     <v-text-field
                     v-model="password"
-                    :dark = true
+                    :dark="false"
                     :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                     :rules="passRules"
                     :type="show1 ? 'text' : 'password'"
@@ -26,9 +27,10 @@
                     outlined
                     required
                     @click:append="show1 = !show1"
+                    @keydown.enter="login"
                     ></v-text-field>
                 </v-row>
-                <v-row id="status" v-if="logged_in">
+                <v-row id="status" v-if="login_error">
                     <v-col>
                         <p id="loginmessage">{{login_message}}</p>
                     </v-col>
@@ -36,10 +38,10 @@
                 <v-row>
                 <v-btn
                 v-on:click="login"
-                :dark = true
+                :dark="false"
                 :disabled="!valid"
-                :loading="logged_in"
-                class="btn-signin"
+                :loading="submitted"
+                id="btn-signin"
                 @click="validate"
                 >
                 SIGN IN
@@ -82,10 +84,12 @@ export default {
             v => !!v || 'Password is required',
         ],
         login_message: 'Not Logged In',
-        logged_in: false
+        login_error: false,
+        submitted: false,
     }),
     methods: {
         login: function() {
+            this.submitted = true;
             axios.post('/login', {
                 email: this.email,
                 password: this.password
@@ -99,7 +103,8 @@ export default {
             .catch(e => {
                 console.log(e)
                 this.login_message = 'Invalid Email/Password'
-                this.logged_in = true;
+                this.login_error = true;
+                this.submitted = false;
             })
         }
     }
@@ -110,7 +115,7 @@ export default {
 #loginform {
     margin-top: 10%;
     width: min(90%, 500px);
-    background-color: #1c1e1f;
+    /*background-color: #1c1e1f;*/
 }
 #status{
     margin-top: 0px;
@@ -129,19 +134,20 @@ export default {
 h1 {
     text-align: center;
     padding-bottom: 1em;
-    color:rgb(219, 214, 214);
+    /*color:rgb(219, 214, 214);*/
+    color: rgb(20, 19, 19)
 }
-.btn-signin {
+#btn-signin {
     width: 100%;
     height: 4em;
-    min-height: 4em;
     margin-bottom: 1em;
-    background-color: #1976d2;
-    outline-color: goldenrod;
+    background-color: #073da1;
+    color:white;
 }
 p {
     padding-top: 5em;
-    color: rgb(219, 214, 214);
+    /*color: rgb(219, 214, 214);*/
+    color: rgb(20, 19, 19)
 }
 #copyright {
     text-align: center;

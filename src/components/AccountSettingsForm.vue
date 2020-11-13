@@ -4,12 +4,12 @@
       <v-form v-model="valid" :readonly="!responsive" ref="form">
         <v-row>
           <v-col cols="4">
-            <v-subheader :dark="true" class="prefix">First Name</v-subheader>
+            <v-subheader :dark="false" class="prefix">First Name</v-subheader>
           </v-col>
           <v-col cols="6" class="text-box">
             <v-text-field
               v-model="firstName"
-              :dark="true"
+              :dark="false"
               outlined
               :required="responsive"
               :rules="[firstNameRules.required]"
@@ -18,12 +18,12 @@
         </v-row>
         <v-row>
           <v-col cols="4">
-            <v-subheader :dark="true" class="prefix">Last Name</v-subheader>
+            <v-subheader :dark="false" class="prefix">Last Name</v-subheader>
           </v-col>
           <v-col cols="6" class="text-box">
             <v-text-field
               v-model="lastName"
-              :dark="true"
+              :dark="false"
               outlined
               :required="responsive"
               :rules="[lastNameRules.required]"
@@ -32,12 +32,12 @@
         </v-row>
         <v-row>
           <v-col cols="4">
-            <v-subheader :dark="true" class="prefix">Email Address</v-subheader>
+            <v-subheader :dark="false" class="prefix">Email Address</v-subheader>
           </v-col>
           <v-col cols="6" class="text-box">
             <v-text-field
               v-model="email"
-              :dark="true"
+              :dark="false"
               outlined
               :required="responsive"
               :rules="[emailRules.required, emailRules.valid]"
@@ -46,12 +46,12 @@
         </v-row>
         <v-row>
           <v-col cols="4">
-            <v-subheader :dark="true" class="prefix">Phone Number</v-subheader>
+            <v-subheader :dark="false" class="prefix">Phone Number</v-subheader>
           </v-col>
           <v-col cols="6" class="text-box">
             <v-text-field
               v-model="phoneNumber"
-              :dark="true"
+              :dark="false"
               outlined
             ></v-text-field>
           </v-col>
@@ -146,7 +146,6 @@ export default {
 <style scoped>
 #account-settings {
   margin-top: 5%;
-  background-color: #1c1e1f;
   width: min(50%, 500px);
 }
 #change-settings {

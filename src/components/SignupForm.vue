@@ -13,7 +13,7 @@
                             <v-text-field
                             v-model="firstName"
                             :rules="[firstNameRules.required]"
-                            :dark="true"
+                            :dark="false"
                             label="First Name *"
                             outlined
                             required
@@ -23,7 +23,7 @@
                             <v-text-field
                             v-model="lastName"
                             :rules="[lastNameRules.required]"
-                            :dark="true"
+                            :dark="false"
                             label="Last Name *"
                             outlined
                             required
@@ -34,7 +34,7 @@
                         <v-text-field
                         v-model="email"
                         :rules="[emailRules.required, emailRules.valid]"
-                        :dark="true"
+                        :dark="false"
                         label="Email Address *"
                         outlined
                         required
@@ -46,7 +46,7 @@
                         :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                         :rules="[pass1Rules.required]"
                         :type="show1 ? 'text' : 'password'"
-                        :dark="true"
+                        :dark="false"
                         label="Password *"
                         outlined
                         required
@@ -59,7 +59,7 @@
                         :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
                         :rules="[pass2Rules.required, checkPasswords]"
                         :type="show2 ? 'text' : 'password'"
-                        :dark="true"
+                        :dark="false"
                         label="Retype Password *"
                         outlined
                         required
@@ -69,14 +69,14 @@
                     <v-row class="text-field">
                         <v-text-field
                         v-model="phoneNumber"
-                        :dark="true"
+                        :dark="false"
                         label="Phone Number"
                         outlined
                         ></v-text-field>
                     </v-row>
                     <v-row>
                     <v-btn
-                    :dark = true
+                    :dark="false"
                     :disabled="!valid"
                     :loading="submitted"
                     id="btn-signup"
@@ -173,7 +173,7 @@
 
 #signup-form {
     margin-top: 5%;
-    background-color: #1c1e1f;
+    /*background-color: #1c1e1f;*/
     width: min(50%, 500px);
 }
 #signup-error-message {
@@ -186,7 +186,8 @@
 h1 {
     text-align: center;
     padding-bottom: 1em;
-    color: rgb(219, 214, 214);
+    /*color: rgb(219, 214, 214);*/
+    color: rgb(20, 19, 19)
 }
 .text-field {
     padding: 0 0.5em;
@@ -207,10 +208,12 @@ h1 {
     height: 4em;
     margin-bottom: 1em;
     background-color: rgb(255, 136, 0);
+    color: white;
 }
 p {
     padding-top: 5em;
-    color: rgb(219, 214, 214);
+    /*color: rgb(219, 214, 214);*/
+    color: rgb(20, 19, 19)
 }
 #copyright {
     text-align: center;
