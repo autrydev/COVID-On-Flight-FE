@@ -39,7 +39,7 @@
                 :dark="false"
                 :disabled="!valid"
                 :loading="logged_in"
-                class="btn-signin"
+                id="btn-signin"
                 @click="validate"
                 >
                 SIGN IN
@@ -132,13 +132,12 @@ h1 {
     /*color:rgb(219, 214, 214);*/
     color: rgb(20, 19, 19)
 }
-.btn-signin {
+#btn-signin {
     width: 100%;
     height: 4em;
-    min-height: 4em;
     margin-bottom: 1em;
-    background-color: #1976d2;
-    outline-color: goldenrod;
+    background-color: #073da1;
+    color:white;
 }
 p {
     padding-top: 5em;

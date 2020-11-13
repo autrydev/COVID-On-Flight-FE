@@ -208,6 +208,7 @@ h1 {
     height: 4em;
     margin-bottom: 1em;
     background-color: rgb(255, 136, 0);
+    color: white;
 }
 p {
     padding-top: 5em;
