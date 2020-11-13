@@ -16,7 +16,7 @@
 
 <style>
 .main {
-  background-color: white;
+  background-color: #FFFFF;
 }
 
 </style>

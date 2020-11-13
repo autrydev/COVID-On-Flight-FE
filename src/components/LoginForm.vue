@@ -8,6 +8,7 @@
                 <v-row>
                     <v-text-field
                     v-model="email"
+                    :dark = true
                     :rules="emailRules"
                     label="Email Address *"
                     outlined
@@ -17,6 +18,7 @@
                 <v-row>
                     <v-text-field
                     v-model="password"
+                    :dark = true
                     :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                     :rules="passRules"
                     :type="show1 ? 'text' : 'password'"
@@ -26,9 +28,17 @@
                     @click:append="show1 = !show1"
                     ></v-text-field>
                 </v-row>
+                <v-row id="status" v-if="logged_in">
+                    <v-col>
+                        <p id="loginmessage">{{login_message}}</p>
+                    </v-col>
+                </v-row>
                 <v-row>
                 <v-btn
+                v-on:click="login"
+                :dark = true
                 :disabled="!valid"
+                :loading="logged_in"
                 class="btn-signin"
                 @click="validate"
                 >
@@ -40,7 +50,7 @@
                     <router-link to="/forgot-password">Forgot Password?</router-link>
                     </v-col>
                     <v-col cols=auto>
-                    <router-link to="/signup-u">Don't have an account? Sign Up</router-link>
+                    <router-link to="/signup">Don't have an account? Sign Up</router-link>
                     </v-col>
                 </v-row>
             </v-form>
@@ -54,39 +64,84 @@
 </template>
 
 <script>
+import axios from 'axios'
+import router from '../router'
 
-  export default {
+export default {
 
     data: () => ({
-      valid: false,
-      show1: false,
-      email: '',
-      emailRules: [
+        valid: false,
+        show1: false,
+        email: '',
+        emailRules: [
         v => !!v || 'Email address is required',
         v => /.+@.+/.test(v) || 'Email address must be valid',
-      ],
-      password: '',
-      passRules: [
-          v => !!v || 'Password is required',
-      ]
+        ],
+        password: '',
+        passRules: [
+            v => !!v || 'Password is required',
+        ],
+        login_message: 'Not Logged In',
+        logged_in: false
     }),
+    methods: {
+        login: function() {
+            axios.post('/login', {
+                email: this.email,
+                password: this.password
+            })
+            .then(response => {
+            // JSON responses are automatically parsed.
+            console.log(response.status)
+                localStorage.user = response.data
+                router.push('dashboard')
+            })
+            .catch(e => {
+                console.log(e)
+                this.login_message = 'Invalid Email/Password'
+                this.logged_in = true;
+            })
+        }
+    }
   };
 </script>
 
 <style scoped>
 #loginform {
     margin-top: 10%;
-    width: min(50%, 500px);
+    width: min(90%, 500px);
+    background-color: #1c1e1f;
+}
+#status{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    text-align: center;
+}
+#loginmessage {
+    color: #f44336;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 h1 {
     text-align: center;
     padding-bottom: 1em;
+    color:rgb(219, 214, 214);
 }
 .btn-signin {
     width: 100%;
+    height: 4em;
+    min-height: 4em;
+    margin-bottom: 1em;
+    background-color: #1976d2;
+    outline-color: goldenrod;
 }
 p {
     padding-top: 5em;
+    color: rgb(219, 214, 214);
 }
 #copyright {
     text-align: center;

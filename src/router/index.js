@@ -1,10 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from '../views/Home.vue'
+import Home from '../components/Home.vue'
 import UserSignup from '../views/UserSignup.vue'
-import AdminSignup from '../views/AdminSignup.vue'
 import Login from '../views/Login.vue'
+import Dashboard from '../views/Dashboard.vue'
+import CovidInfo from '../views/CovidInfo.vue'
+import MyCovidStatus from '../views/MyCovidStatus.vue'
+import AccountSettings from '../views/AccountSettings.vue'
+
 
 Vue.use(VueRouter)
 
@@ -23,19 +27,34 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/signup-u',
+    path: '/signup',
     name: 'User Sign Up',
     component: UserSignup
-  },
-  {
-    path: '/signup-a',
-    name: 'Admin Sign Up',
-    component: AdminSignup
   },
   {
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '/dashboard',
+    name: 'Dashboard',
+    component: Dashboard
+  },
+  {
+    path: '/covid19informaion',
+    name: 'CovidInfo',
+    component: CovidInfo
+  },
+  {
+    path: '/mycovidstatus',
+    name: 'MyCovidStatus',
+    component: MyCovidStatus
+  },
+  {
+    path: '/accountsettings',
+    name: 'AccountSettings',
+    component: AccountSettings
   }
 ]
 
