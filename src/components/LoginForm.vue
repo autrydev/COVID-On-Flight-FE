@@ -13,6 +13,7 @@
                     label="Email Address *"
                     outlined
                     required
+                    @keydown.enter="login"
                     ></v-text-field>
                 </v-row>
                 <v-row>
@@ -26,9 +27,10 @@
                     outlined
                     required
                     @click:append="show1 = !show1"
+                    @keydown.enter="login"
                     ></v-text-field>
                 </v-row>
-                <v-row id="status" v-if="logged_in">
+                <v-row id="status" v-if="login_error">
                     <v-col>
                         <p id="loginmessage">{{login_message}}</p>
                     </v-col>
@@ -38,7 +40,7 @@
                 v-on:click="login"
                 :dark="false"
                 :disabled="!valid"
-                :loading="logged_in"
+                :loading="submitted"
                 id="btn-signin"
                 @click="validate"
                 >
@@ -82,10 +84,12 @@ export default {
             v => !!v || 'Password is required',
         ],
         login_message: 'Not Logged In',
-        logged_in: false
+        login_error: false,
+        submitted: false,
     }),
     methods: {
         login: function() {
+            this.submitted = true;
             axios.post('/login', {
                 email: this.email,
                 password: this.password
@@ -99,7 +103,8 @@ export default {
             .catch(e => {
                 console.log(e)
                 this.login_message = 'Invalid Email/Password'
-                this.logged_in = true;
+                this.login_error = true;
+                this.submitted = false;
             })
         }
     }
