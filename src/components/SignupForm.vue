@@ -66,6 +66,14 @@
                         @click:append="show2 = !show2"
                         ></v-text-field>
                     </v-row>
+                    <v-row class="text-field">
+                        <v-text-field
+                        v-model="phoneNumber"
+                        :dark="true"
+                        label="Phone Number"
+                        outlined
+                        ></v-text-field>
+                    </v-row>
                     <v-row>
                     <v-btn
                     :dark = true
