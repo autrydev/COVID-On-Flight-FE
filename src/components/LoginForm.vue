@@ -8,7 +8,7 @@
                 <v-row>
                     <v-text-field
                     v-model="email"
-                    :dark = true
+                    :dark="false"
                     :rules="emailRules"
                     label="Email Address *"
                     outlined
@@ -18,7 +18,7 @@
                 <v-row>
                     <v-text-field
                     v-model="password"
-                    :dark = true
+                    :dark="false"
                     :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                     :rules="passRules"
                     :type="show1 ? 'text' : 'password'"
@@ -36,7 +36,7 @@
                 <v-row>
                 <v-btn
                 v-on:click="login"
-                :dark = true
+                :dark="false"
                 :disabled="!valid"
                 :loading="logged_in"
                 class="btn-signin"
@@ -110,7 +110,7 @@ export default {
 #loginform {
     margin-top: 10%;
     width: min(90%, 500px);
-    background-color: #1c1e1f;
+    /*background-color: #1c1e1f;*/
 }
 #status{
     margin-top: 0px;
@@ -129,7 +129,8 @@ export default {
 h1 {
     text-align: center;
     padding-bottom: 1em;
-    color:rgb(219, 214, 214);
+    /*color:rgb(219, 214, 214);*/
+    color: rgb(20, 19, 19)
 }
 .btn-signin {
     width: 100%;
@@ -141,7 +142,8 @@ h1 {
 }
 p {
     padding-top: 5em;
-    color: rgb(219, 214, 214);
+    /*color: rgb(219, 214, 214);*/
+    color: rgb(20, 19, 19)
 }
 #copyright {
     text-align: center;

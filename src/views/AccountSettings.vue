@@ -26,7 +26,6 @@ export default {
 
 <style scoped>
 .accountsettingspage {
-  /** background-color: green; */
-  background-color: #1c1e1f;
+  /*background-color: #1c1e1f;*/
 }
 </style>
