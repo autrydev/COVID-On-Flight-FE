@@ -43,7 +43,7 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-btn :dark="true" id="update-status" @click="redirect()">Update My Status</v-btn>
+            <v-btn :dark="true" id="update-status" @click="redirectToSurvey()">Update My Status</v-btn>
           </v-col>
         </v-row>
       </v-form>
@@ -53,16 +53,35 @@
 
 
 <script>
-
+  import axios from 'axios'
   export default {
-
     data: () => ({
-        valid: false,
+      valid: false,
+      currentStatus: "",
+      lastUpdated: "",
+      lastFlight: "",
     }),
     methods: {
-        redirect() {
-            //router.push("/takesurvey");
-        }
+      redirectToSurvey() {
+          //router.push("/takesurvey");
+      },
+      fetchCOVIDInfo() {
+          axios.post('/mycovidstatus', {
+              id: localStorage.user
+          })
+          .then(response => {
+            // JSON responses are automatically parsed.
+            this.currentStatus = response.data["status"]
+            this.lastUpdated = response.data["last_update"]
+            this.lastFlight = response.data["last_flight"]
+          })
+          .catch(e => {
+              console.log(e)
+          })
+      }
+    },
+    beforeMount() {
+      this.fetchCOVIDInfo();
     }
   };
 </script>
