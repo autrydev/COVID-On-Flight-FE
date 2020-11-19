@@ -87,6 +87,11 @@ export default {
         login_error: false,
         submitted: false,
     }),
+
+    created () {
+        localStorage.clear()
+    },
+
     methods: {
         login: function() {
             this.submitted = true;
