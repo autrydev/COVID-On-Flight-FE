@@ -210,7 +210,7 @@ h3 {
     color:white;
 }
 p {
-    padding-top: 5em;
+    padding-top: 2em;
     /*color: rgb(219, 214, 214);*/
     color: rgb(20, 19, 19)
 }
