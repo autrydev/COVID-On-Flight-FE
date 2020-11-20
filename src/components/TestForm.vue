@@ -104,6 +104,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+import router from '../router'
 export default {
     data(){
         return {
@@ -121,6 +123,25 @@ export default {
       registerFlight(){
           console.log('Flight is ' + this.flightNumber)
           //Look at useradmin branch for how to bring this to backend look at vscode for download
+          axios.post('/dashboard', {
+              reservation_number: this.reservationNumber,
+              flight_number: this.flightNumber,
+              departure_city: this.departureCity,
+              departure_date: this.departureDate,
+              departure_time: this.departureTime,
+              arrival_city: this.arrivalCity,
+              arrival_date: this.arrivalDate,
+              arrival_time: this.arrivalTime,
+          })
+          .then(response => {
+              // JSON responses are automatically parsed.
+              if(response.status == 200) {
+                  router.push('dashboard');
+                }
+          })
+          .catch(e => {
+              console.log(e);
+          })
       }
     }
 }
