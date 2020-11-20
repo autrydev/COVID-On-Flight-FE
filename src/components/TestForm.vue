@@ -1,5 +1,5 @@
 <template>
-  <v-form @submit.prevent="submit">
+  <v-form>
     <v-container>
       <v-row>
           <v-col
@@ -7,8 +7,7 @@
             md="4"
           >
             <v-text-field
-              v-model="ReservationNumber"
-              :rules="nameRules"
+              v-model="reservationNumber"
               :counter="10"
               label="Reservation Number"
               required
@@ -20,22 +19,9 @@
             md="4"
           >
             <v-text-field
-              v-model="FlightNumber"
-              :rules="nameRules"
+              v-model="flightNumber"
               :counter="10"
               label="Flight Number"
-              required
-            ></v-text-field>
-          </v-col>
-
-          <v-col
-            cols="12"
-            md="4"
-          >
-            <v-text-field
-              v-model="Day"
-              :rules="nameRules"
-              label="Date"
               required
             ></v-text-field>
           </v-col>
@@ -46,21 +32,25 @@
             md="4"
           >
             <v-text-field
-              v-model="From"
-              :rules="nameRules"
+              v-model="departureCity"
               :counter="10"
               label="Departure City"
               required
             ></v-text-field>
           </v-col>
-
+          <v-col>
+          <v-text-field
+              v-model="departureDate"
+              label="Departure Date"
+              required
+            ></v-text-field>
+          </v-col>
           <v-col
             cols="12"
             md="4"
           >
             <v-text-field
-              v-model="DepartureTime"
-              :rules="nameRules"
+              v-model="departureTime"
               :counter="10"
               label="Departure Time"
               required
@@ -73,21 +63,25 @@
             md="4"
           >
             <v-text-field
-              v-model="To"
-              :rules="nameRules"
+              v-model="arrivalCity"
               :counter="10"
               label="Arrival City"
               required
             ></v-text-field>
           </v-col>
-
+          <v-col>
+            <v-text-field
+                v-model="arrivalDate"
+                label="Arrival Date"
+                required
+              ></v-text-field>
+            </v-col>
           <v-col
             cols="12"
             md="4"
           >
             <v-text-field
-              v-model="ArrivalTime"
-              :rules="nameRules"
+              v-model="arrivalTime"
               :counter="10"
               label="Arrival Time"
               required
@@ -101,7 +95,7 @@
           >
 
 
-        <v-btn color="green" type="submit">Submit</v-btn>
+        <v-btn color="green" type="submit" @click="registerFlight()">Submit</v-btn>
           </v-col>
         </v-row>
 
@@ -113,16 +107,21 @@
 export default {
     data(){
         return {
-        FlightNumber:null,
-        email:null,
-        lastname:null,
+        reservationNumber: null,
+        flightNumber: null,
+        departureCity: null,
+        departureDate: null,
+        departureTime: null,
+        arrivalCity: null,
+        arrivalDate: null,
+        arrivalTime: null,
         }
     },
     methods:{
-    submit(){
-        console.log('Flight is ' + this.FlightNumber)
-        //Look at useradmin branch for how to bring this to backend look at vscode for download
-    }
+      registerFlight(){
+          console.log('Flight is ' + this.flightNumber)
+          //Look at useradmin branch for how to bring this to backend look at vscode for download
+      }
     }
 }
 </script>
