@@ -10,7 +10,6 @@
             <v-text-field
               v-model="currentStatus"
               :dark="false"
-              placeholder="FETCH_CURRENT_STATUS"
               outlined
             ></v-text-field>
           </v-col>
@@ -21,7 +20,7 @@
           </v-col>
           <v-col cols="6" class="text-box">
             <v-text-field
-              v-model="date_lastUpdate"
+              v-model="lastUpdated"
               :dark="false"
               placeholder="FETCH_LAST_NAME"
               outlined
@@ -34,7 +33,7 @@
           </v-col>
           <v-col cols="6" class="text-box">
             <v-text-field
-              v-model="date_lastFlight"
+              v-model="lastFlight"
               :dark="false"
               placeholder="FETCH_EMAIL"
               outlined
@@ -66,7 +65,7 @@
           //router.push("/takesurvey");
       },
       fetchCOVIDInfo() {
-          axios.post('/mycovidstatus', {
+          axios.post('/MyCovidStatus', {
               id: localStorage.user
           })
           .then(response => {
