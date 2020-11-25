@@ -107,18 +107,16 @@
 import axios from 'axios'
 import router from '../router'
 export default {
-    data(){
-        return {
-        reservationNumber: null,
-        flightNumber: null,
-        departureCity: null,
-        departureDate: null,
-        departureTime: null,
-        arrivalCity: null,
-        arrivalDate: null,
-        arrivalTime: null,
-        }
-    },
+    data: () => ({
+      reservationNumber: null,
+      flightNumber: null,
+      departureCity: null,
+      departureDate: null,
+      departureTime: null,
+      arrivalCity: null,
+      arrivalDate: null,
+      arrivalTime: null,
+    }),
     methods:{
       registerFlight(){
           console.log('Flight is ' + this.flightNumber)
