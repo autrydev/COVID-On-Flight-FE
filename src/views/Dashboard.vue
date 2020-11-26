@@ -1,16 +1,19 @@
 <template>
     <v-container class="dashboardpage">
         <DashboardForm />
+        <UserFlightHistory />
     </v-container>
 </template>
 
 <script>
 import DashboardForm from '@/components/DashboardForm.vue'
+import UserFlightHistory from '@/components/UserFlightHistory.vue'
 
 export default {
   name: 'Dashboard',
   components: {
-    DashboardForm
+    DashboardForm,
+    UserFlightHistory
   }
 }
 </script>
