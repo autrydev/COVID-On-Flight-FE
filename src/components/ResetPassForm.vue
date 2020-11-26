@@ -4,6 +4,15 @@
             <div>
                 <h1>COVID On-Flight</h1>
             </div>
+            <v-alert
+            :value="alert"
+            dense
+            text
+            type="success"
+            transition="scale-transition"
+            >
+            Password reset successfully. Redirecting to login page...
+            </v-alert>
             <v-stepper v-model="reset_step">
                 <v-stepper-header>
                     <v-stepper-step
@@ -60,7 +69,7 @@
                                 id="btn-signin"
                                 @click="validate"
                                 >
-                                EMAIL RESET CODE
+                                Email Reset Code
                                 </v-btn>
                                 </v-row>
                                 
@@ -76,13 +85,14 @@
                             </div>
                             <v-form v-model="valid">
                                 <v-row>
-                                    <v-text-field
+                                    <v-text-field 
                                     v-model="code"
                                     :dark="false"
                                     :rules="codeRules"
                                     label="Code *"
                                     outlined
                                     required
+                                    maxlength="6"
                                     ></v-text-field>
                                 </v-row>
                                 <v-row id="status" v-if="reset_error">
@@ -92,14 +102,14 @@
                                 </v-row>
                                 <v-row>
                                 <v-btn
-                                v-on:click="sendcode"
+                                v-on:click="verifycode"
                                 :dark="false"
                                 :disabled="!valid"
                                 :loading="submitted"
                                 id="btn-signin"
                                 @click="validate"
                                 >
-                                EMAIL RESET CODE
+                                Verify Code
                                 </v-btn>
                                 </v-row>
                             </v-form>
@@ -107,9 +117,54 @@
                     </v-stepper-content>
 
                     <v-stepper-content step="3">
-                        
-                        Reset Password Form
-                        
+                        <v-container id="passresetform">
+                            <div>
+                                <h3>Set your new password</h3>
+                            </div>
+                            <v-row class="pass-field">
+                                <v-text-field
+                                v-model="password1"
+                                :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                                :rules="[pass1Rules.required]"
+                                :type="show1 ? 'text' : 'password'"
+                                :dark="false"
+                                label="Password *"
+                                outlined
+                                required
+                                @click:append="show1 = !show1"
+                                ></v-text-field>
+                            </v-row>
+                            <v-row class="pass-field">
+                                <v-text-field
+                                v-model="password2"
+                                :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                                :rules="[pass2Rules.required, checkPasswords]"
+                                :type="show2 ? 'text' : 'password'"
+                                :dark="false"
+                                label="Retype Password *"
+                                outlined
+                                required
+                                @click:append="show2 = !show2"
+                                ></v-text-field>
+                            </v-row>
+                            <v-row id="status" v-if="reset_error">
+                                <v-col>
+                                    <p id="reset-error">{{reset_error}}</p>
+                                </v-col>
+                            </v-row>
+                            <v-row>
+                                <v-btn
+                                :dark="false"
+                                :disabled="!valid"
+                                :loading="submitted"
+                                id="btn-signin"
+                                @click="validate"
+                                v-on:click="resetpass"
+                                >
+                                RESET PASSWORD
+                                </v-btn>
+                            </v-row>
+                        </v-container>
                     </v-stepper-content>
                 </v-stepper-items>
             </v-stepper>
@@ -130,6 +185,7 @@
 
 <script>
 import axios from 'axios'
+import router from '../router'
 
 export default {
 
@@ -137,11 +193,24 @@ export default {
         reset_step: 1,
         valid: false,
         show1: false,
+        alert: false,
         email: '',
         emailRules: [
         v => !!v || 'Email address is required',
         v => /.+@.+/.test(v) || 'Email address must be valid',
         ],
+        codeRules: [
+        v => !!v || 'Code is required',
+        v => /^\d+$/.test(v) || 'Code invalid'
+        ],
+        password1: '',
+        pass1Rules: {
+            required: v => !!v || 'Password is required',
+        },
+        password2: '',
+        pass2Rules: {
+            required: v => !!v || 'Retyping your password is required',
+        },
         reset_error: ''
     }),
     methods: {
@@ -150,14 +219,46 @@ export default {
                 email: this.email
             })
             .then(response => {
+                this.reset_step = 2
                 console.log(response)
             })
             .catch(e => {
                 this.reset_error = 'Account does not exist with that email'
                 console.log(e)
             })
-
-            this.reset_step = 2
+        },
+        verifycode: function() {
+            axios.post('/check-code', {
+                code: this.code,
+                email: this.email
+            })
+            .then(response => {
+                this.reset_step = 3
+                console.log(response)
+            })
+            .catch(e => {
+                this.reset_error = 'Code Invalid. Please try again'
+                console.log(e)
+            })
+        },
+        checkPasswords() {
+            return this.password1 === this.password2 || 'Passwords must match';
+        },
+        resetpass: function() {
+            axios.post('/reset-password', {
+                password: this.password1,
+                email: this.email
+            })
+            .then(response => {
+                this.alert = true
+                console.log(response)
+            })
+            .catch(e => {
+                this.reset_error = 'An error has occurred. Please try again'
+                
+                console.log(e)
+            })
+            setTimeout(function(){ router.push('login'); }, 3500);
         }
     }
   };
@@ -177,6 +278,10 @@ export default {
     width: min(85%, 400px);
     /*background-color: #1c1e1f;*/
 }
+#passresetform {
+    width: min(85%, 400px);
+    /*background-color: #1c1e1f;*/
+}
 #status{
     margin-top: 0px;
     margin-bottom: 0px;
@@ -190,6 +295,9 @@ export default {
     margin-bottom: 0px;
     padding-top: 0px;
     padding-bottom: 0px;
+}
+.pass-field {
+    padding: 0 0.5em;
 }
 h1 {
     text-align: center;
