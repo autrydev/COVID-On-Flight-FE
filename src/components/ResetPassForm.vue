@@ -215,7 +215,7 @@ export default {
     }),
     methods: {
         sendcode: function() {
-            axios.post('/reset-code', {
+            axios.post('/sendcode', {
                 email: this.email
             })
             .then(response => {
