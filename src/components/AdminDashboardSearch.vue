@@ -2,17 +2,17 @@
     <div>
         <v-container>
             <v-card class="flighttables">
-                <h2> Flights </h2>
                 <v-data-table
                     :headers="headers"
                     :items="desserts"
                     sort-by="calories"
-                    class="elevation-1"
+                    class="elevation-2"
                 >
                     <template v-slot:top>
                     <v-toolbar
                         flat
                     >
+                        <v-toolbar-title>Flights</v-toolbar-title>
                         <v-spacer></v-spacer>
                         <v-dialog
                         v-model="dialog"
@@ -52,20 +52,94 @@
                                         sm="6"
                                         md="6"
                                     >
-                                        <v-text-field
-                                        v-model="searchParameters.from_date"
-                                        label="Departure Date"
-                                        ></v-text-field>
+                                        <v-menu
+                                            ref="menu1"
+                                            v-model="menu1"
+                                            :close-on-content-click="false"
+                                            :return-value.sync="searchParameters.from_date"
+                                            transition="scale-transition"
+                                            offset-y
+                                            min-width="290px"
+                                          >
+                                            <template v-slot:activator="{ on, attrs }">
+                                              <v-text-field
+                                                v-model="searchParameters.from_date"
+                                                label="Departure Date"
+                                                prepend-icon="mdi-calendar"
+                                                readonly
+                                                v-bind="attrs"
+                                                v-on="on"
+                                              ></v-text-field>
+                                            </template>
+                                            <v-date-picker
+                                              v-model="searchParameters.from_date"
+                                              no-title
+                                              scrollable
+                                            >
+                                              <v-spacer></v-spacer>
+                                              <v-btn
+                                                text
+                                                color="primary"
+                                                @click="menu = false"
+                                              >
+                                                Cancel
+                                              </v-btn>
+                                              <v-btn
+                                                text
+                                                color="primary"
+                                                @click="$refs.menu1.save(searchParameters.from_date)"
+                                              >
+                                                OK
+                                              </v-btn>
+                                            </v-date-picker>
+                                        </v-menu>
                                     </v-col>
                                     <v-col
                                         cols="12"
                                         sm="6"
                                         md="6"
                                     >
-                                        <v-text-field
-                                        v-model="searchParameters.to_date"
-                                        label="Arrival Date"
-                                        ></v-text-field>
+                                        <v-menu
+                                            ref="menu2"
+                                            v-model="menu2"
+                                            :close-on-content-click="false"
+                                            :return-value.sync="searchParameters.to_date"
+                                            transition="scale-transition"
+                                            offset-y
+                                            min-width="290px"
+                                          >
+                                            <template v-slot:activator="{ on, attrs }">
+                                              <v-text-field
+                                                v-model="searchParameters.to_date"
+                                                label="Arrival Date"
+                                                prepend-icon="mdi-calendar"
+                                                readonly
+                                                v-bind="attrs"
+                                                v-on="on"
+                                              ></v-text-field>
+                                            </template>
+                                            <v-date-picker
+                                              v-model="searchParameters.to_date"
+                                              no-title
+                                              scrollable
+                                            >
+                                              <v-spacer></v-spacer>
+                                              <v-btn
+                                                text
+                                                color="primary"
+                                                @click="menu = false"
+                                              >
+                                                Cancel
+                                              </v-btn>
+                                              <v-btn
+                                                text
+                                                color="primary"
+                                                @click="$refs.menu2.save(searchParameters.to_date)"
+                                              >
+                                                OK
+                                              </v-btn>
+                                            </v-date-picker>
+                                        </v-menu>
                                     </v-col>
                                     <v-col
                                         cols="12"
@@ -182,6 +256,8 @@ import axios from 'axios'
 
 export default {
     data: () => ({
+        menu1: false,
+        menu2: false,
         searchParameters: {
             from_date: null,
             to_date: null,
@@ -205,11 +281,11 @@ export default {
             sortable: false,
             value: 'name',
             },
-            { text: 'Calories', value: 'calories' },
-            { text: 'Fat (g)', value: 'fat' },
-            { text: 'Carbs (g)', value: 'carbs' },
-            { text: 'Protein (g)', value: 'protein' },
-            { text: 'Actions', value: 'actions', sortable: false },
+            { text: 'Date', value: 'calories', sortable: false },
+            { text: 'Departure City', value: 'fat', sortable: false },
+            { text: 'Arrival City', value: 'carbs', sortable: false },
+            { text: 'COVID STATUS', value: 'protein' },
+            { text: 'Actions', value: 'actions' },
         ],
         desserts: [],
         editedIndex: -1,
