@@ -135,6 +135,22 @@ export default {
             .catch(e => {
                 console.log(e)
             })
+    },
+    updateAccountInfo() {
+      axios.post('/updateaccountsettings', {
+          first_name: this.firstName,
+          last_name: this.lastName,
+          email: this.email,
+          phone_number: this.phoneNumber,
+      })
+      .then(response => {
+          if(response.status == 200) {
+            //show notification of success
+          }
+      })
+      .catch(e => {
+          console.log(e)
+      })
     }
   },
   beforeMount() {
