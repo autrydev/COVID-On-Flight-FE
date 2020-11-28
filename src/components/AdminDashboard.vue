@@ -20,19 +20,20 @@
                 </v-card>
             </v-col>
         </v-row>
+        <AdminDashboardSearch />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-
+import AdminDashboardSearch from './AdminDashboardSearch.vue'
 export default {
+  components: { AdminDashboardSearch },
     data: () => ({
         positivecount: 0,
         negativecount: 0,
         unknowncount: 0
     }),
-
     created() {
         axios.get('/admindashboard', {})
             .then(response => {
