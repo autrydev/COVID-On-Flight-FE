@@ -4,8 +4,8 @@
             <v-card class="flighttables">
                 <v-data-table
                     :headers="headers"
-                    :items="desserts"
-                    sort-by="calories"
+                    :items="flights"
+                    sort-by="date"
                     class="elevation-2"
                 >
                     <template v-slot:top>
@@ -45,6 +45,7 @@
                                         <v-text-field
                                         v-model="searchParameters.flight_id"
                                         label="Flight Number"
+                                        clearable
                                         ></v-text-field>
                                     </v-col>
                                     <v-col
@@ -69,6 +70,7 @@
                                                 readonly
                                                 v-bind="attrs"
                                                 v-on="on"
+                                                clearable
                                               ></v-text-field>
                                             </template>
                                             <v-date-picker
@@ -116,6 +118,7 @@
                                                 readonly
                                                 v-bind="attrs"
                                                 v-on="on"
+                                                clearable
                                               ></v-text-field>
                                             </template>
                                             <v-date-picker
@@ -149,6 +152,7 @@
                                         <v-text-field
                                         v-model="searchParameters.departure_city"
                                         label="Departure City"
+                                        clearable
                                         ></v-text-field>
                                     </v-col>
                                     <v-col
@@ -159,26 +163,7 @@
                                         <v-text-field
                                         v-model="searchParameters.arrival_city"
                                         label="Arrival City"
-                                        ></v-text-field>
-                                    </v-col>
-                                    <v-col
-                                        cols="12"
-                                        sm="6"
-                                        md="6"
-                                    >
-                                        <v-text-field
-                                        v-model="searchParameters.departureTime"
-                                        label="Departure Time"
-                                        ></v-text-field>
-                                    </v-col>
-                                    <v-col
-                                        cols="12"
-                                        sm="6"
-                                        md="6"
-                                    >
-                                        <v-text-field
-                                        v-model="searchParameters.arrivalTime"
-                                        label="Arrival Time"
+                                        clearable
                                         ></v-text-field>
                                     </v-col>
                                     <v-col
@@ -186,10 +171,32 @@
                                         sm="6"
                                         md="12"
                                     >
-                                        <v-checkbox
-                                        v-model="searchParameters.covidStatus"
-                                        :label="'Covid Status: ' + covidCheckbox()"
-                                        ></v-checkbox>
+                                        <v-card
+                                            class="mx-auto"
+                                            max-width="300"
+                                            tile
+                                          >
+                                            <v-list dense>
+                                              <v-subheader>COVID Status</v-subheader>
+                                              <v-list-item-group
+                                                v-model="covidOption"
+                                                color="primary"
+                                                mandatory
+                                              >
+                                                <v-list-item
+                                                  v-for="(option, i) in covidOptions"
+                                                  :key="i"
+                                                >
+                                                  <v-list-item-icon>
+                                                    <v-icon v-text="option.icon"></v-icon>
+                                                  </v-list-item-icon>
+                                                  <v-list-item-content>
+                                                    <v-list-item-title v-text="option.text"></v-list-item-title>
+                                                  </v-list-item-content>
+                                                </v-list-item>
+                                              </v-list-item-group>
+                                            </v-list>
+                                          </v-card>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -208,6 +215,7 @@
                                 color="blue darken-1"
                                 text
                                 @click="searchFlights()"
+                                v-on:click="close"
                             >
                                 Search
                             </v-btn>
@@ -264,14 +272,15 @@ export default {
             departure_city: null,
             arrival_city: null,
             flight_id: null,
-            departureTime: null,
-            arrivalTime: null,
-            covidStatus: false,
+            covidStatus: null,
         },
-        searchResults: {
-            totalFlights: null,
-            flights: null,
-        },
+        flights: [],
+        covidOption: 2,
+        covidOptions: [
+          { text: 'Positive', icon: 'mdi-plus-circle'},
+          { text: 'Negative', icon: 'mdi-minus-circle'},
+          { text: 'Both', icon: 'mdi-expand-all'},
+        ],
         dialog: false,
         dialogDelete: false,
         headers: [
@@ -279,15 +288,15 @@ export default {
             text: 'Flight No.',
             align: 'start',
             sortable: false,
-            value: 'name',
+            value: 'flightID',
             },
-            { text: 'Date', value: 'calories', sortable: false },
-            { text: 'Departure City', value: 'fat', sortable: false },
-            { text: 'Arrival City', value: 'carbs', sortable: false },
-            { text: 'COVID STATUS', value: 'protein' },
+            { text: 'Date', value: 'date' },
+            { text: 'Departure City', value: 'departureCity' },
+            { text: 'Arrival City', value: 'arrivalCity' },
+            { text: 'COVID Count', value: 'covidCount' },
             { text: 'Actions', value: 'actions' },
         ],
-        desserts: [],
+        /*desserts: [],
         editedIndex: -1,
         editedItem: {
             name: '',
@@ -302,11 +311,8 @@ export default {
             fat: 0,
             carbs: 0,
             protein: 0,
-        },
+        },*/
     }),
-    created() {
-        this.initialize();
-    },
     watch: {
       dialog (val) {
         val || this.close()
@@ -316,107 +322,39 @@ export default {
       },
     },
     methods: {
-      covidCheckbox() {
-        return (this.searchParameters.covidStatus ? "Positive" : "Negative")
+      formatOptions() {
+          //Set the appropriate menu index to the desired value
+          if(this.covidOption == 0) { this.searchParameters.covidStatus = true; }
+          else if(this.covidOption == 1) { this.searchParameters.covidStatus = false}
+          else {this.searchParameters.covidStatus = null}
+          //Change empty strings to null
+          if(this.searchParameters.from_date == '') { this.searchParameters.from_date = null }
+          if(this.searchParameters.to_date == '') { this.searchParameters.to_date = null }
+          if(this.searchParameters.departure_city == '') { this.searchParameters.departure_city = null }
+          if(this.searchParameters.arrival_city == '') { this.searchParameters.arrival_city = null }
+          if(this.searchParameters.flight_id == '') { this.searchParameters.flight_id = null }
+
       },
       searchFlights() {
+        this.formatOptions()
+        console.log(this.searchParameters.from_date)
+        console.log(this.searchParameters.to_date)
+        console.log(this.searchParameters.departure_city)
+        console.log(this.searchParameters.arrival_city)
+        console.log(this.searchParameters.flight_id)
+        console.log(this.searchParameters.covidStatus)
         axios.post('/adminflightsearch', this.searchParameters)
-            /*console.log(this.searchParameters.flight_id)
-            console.log(this.searchParameters.from_date)
-            console.log(this.searchParameters.to_date)
-            console.log(this.searchParameters.departure_city)
-            console.log(this.searchParameters.arrival_city)
-            console.log(this.searchParameters.departureTime)
-            console.log(this.searchParameters.arrivalTime)
-            console.log(this.searchParameters.covidStatus)*/
             .then(response => {
                 console.log(response.data)
-                this.searchResults.totalFlights = response.data["count"]
-                this.searchResults.flights = response.data["flights"]
-                this.initializeFlights()
+                this.flights = response.data["flights"]
+                /*for(const flight of this.flights) {
+                }*/
             })
             .catch(e => {
                 console.log(e)
             })
       },
-      initializeFlights() {
-          
-      },
-      initialize () {
-        this.desserts = [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-          },
-        ]
-      },
-      editItem (item) {
+      /*editItem (item) {
         this.editedIndex = this.desserts.indexOf(item)
         this.editedItem = Object.assign({}, item)
         this.dialog = true
@@ -429,7 +367,7 @@ export default {
       deleteItemConfirm () {
         this.desserts.splice(this.editedIndex, 1)
         this.closeDelete()
-      },
+      },*/
       close () {
         this.dialog = false
         this.$nextTick(() => {
@@ -437,7 +375,7 @@ export default {
           this.editedIndex = -1
         })
       },
-      closeDelete () {
+      /*closeDelete () {
         this.dialogDelete = false
         this.$nextTick(() => {
           this.editedItem = Object.assign({}, this.defaultItem)
@@ -451,7 +389,7 @@ export default {
           this.desserts.push(this.editedItem)
         }
         this.close()
-      },
+      },*/
     },
 }
 </script>
