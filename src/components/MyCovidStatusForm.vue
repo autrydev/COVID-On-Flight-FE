@@ -22,7 +22,6 @@
             <v-text-field
               v-model="lastUpdated"
               :dark="false"
-              placeholder="FETCH_LAST_NAME"
               outlined
             ></v-text-field>
           </v-col>
@@ -35,7 +34,6 @@
             <v-text-field
               v-model="lastFlight"
               :dark="false"
-              placeholder="FETCH_EMAIL"
               outlined
             ></v-text-field>
           </v-col>
@@ -65,14 +63,22 @@
           //router.push("/takesurvey");
       },
       fetchCOVIDInfo() {
-          axios.post('/MyCovidStatus', {
-              id: localStorage.user
+          console.log(localStorage.user)
+          axios.post('/covidstatus', {
+              id: localStorage.user,
+              requestType: "fetch"
           })
           .then(response => {
             // JSON responses are automatically parsed.
-            this.currentStatus = response.data["status"]
-            this.lastUpdated = response.data["last_update"]
-            this.lastFlight = response.data["last_flight"]
+            console.log(response.data)
+            this.currentStatus = response.data["covidstatus"]
+            if(response.data["lastupdate"] == null) {
+                 this.lastUpdated = "N/A"
+            }
+            else {
+                this.lastUpdated = response.data["lastupdate"]
+            }
+            this.lastFlight = response.data["lastflight"]
           })
           .catch(e => {
               console.log(e)

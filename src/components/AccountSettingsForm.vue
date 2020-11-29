@@ -123,7 +123,8 @@ export default {
     },
     fetchAccountInfo() {
       axios.post('/accountsettings', {
-                id: localStorage.user
+                id: localStorage.user,
+                requestType: "fetch"
             })
             .then(response => {
               // JSON responses are automatically parsed.
