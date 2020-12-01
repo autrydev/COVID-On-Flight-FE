@@ -65,7 +65,7 @@
         </v-row>
         <v-row v-show="responsive">
           <v-col>
-            <v-btn :dark="true" id="update-settings" @click="updateSettings()"
+            <v-btn :dark="true" id="update-settings" @click="updateAccountInfo()"
               >Save changes</v-btn
             >
           </v-col>
@@ -123,8 +123,7 @@ export default {
     },
     fetchAccountInfo() {
       axios.post('/accountsettings', {
-                id: localStorage.user,
-                requestType: "fetch"
+            id: localStorage.user,
             })
             .then(response => {
               // JSON responses are automatically parsed.
@@ -138,16 +137,19 @@ export default {
             })
     },
     updateAccountInfo() {
-      axios.post('/updateaccountsettings', {
+      axios.post('/accountsettings', {
+          id: localStorage.user,
           first_name: this.firstName,
           last_name: this.lastName,
           email: this.email,
           phone_number: this.phoneNumber,
       })
       .then(response => {
-          if(response.status == 200) {
-            //show notification of success
-          }
+          this.firstName = response.data["firstName"]
+          this.lastName = response.data["lastName"]
+          this.email = response.data["email"]
+          this.phoneNumber = response.data["phoneNumber"]
+          window.location.reload()
       })
       .catch(e => {
           console.log(e)
