@@ -200,8 +200,7 @@ export default {
         v => /.+@.+/.test(v) || 'Email address must be valid',
         ],
         codeRules: [
-        v => !!v || 'Code is required',
-        v => /^\d+$/.test(v) || 'Code invalid'
+        v => !!v || 'Code is required'
         ],
         password1: '',
         pass1Rules: {
@@ -228,7 +227,7 @@ export default {
             })
         },
         verifycode: function() {
-            axios.post('/check-code', {
+            axios.post('/checkcode', {
                 code: this.code,
                 email: this.email
             })
@@ -245,7 +244,7 @@ export default {
             return this.password1 === this.password2 || 'Passwords must match';
         },
         resetpass: function() {
-            axios.post('/reset-password', {
+            axios.post('/resetpassword', {
                 password: this.password1,
                 email: this.email
             })
