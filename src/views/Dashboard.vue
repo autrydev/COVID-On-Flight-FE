@@ -7,6 +7,7 @@
         </div>
         <div v-if="!admin">
           <DashboardForm />
+        <UserFlightHistory />
         </div>
         <app-footer></app-footer>
     </v-container>
@@ -18,6 +19,7 @@ import AuthGuard from '@/components/AuthGuard'
 import AppFooter from '@/components/AppFooter'
 import DashboardHeader from '@/components/DashboardHeader'
 import AdminDashboard from '@/components/AdminDashboard'
+import UserFlightHistory from '@/components/UserFlightHistory.vue'
 
 export default {
   name: 'Dashboard',
@@ -26,7 +28,8 @@ export default {
     AuthGuard,
     AppFooter,
     DashboardHeader,
-    AdminDashboard
+    AdminDashboard,
+    UserFlightHistory
   },
 
   data: () => ({
