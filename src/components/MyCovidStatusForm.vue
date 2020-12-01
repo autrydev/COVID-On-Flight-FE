@@ -51,6 +51,8 @@
 
 <script>
   import axios from 'axios'
+  import router from '../router'
+  
   export default {
     data: () => ({
       valid: false,
@@ -60,7 +62,7 @@
     }),
     methods: {
       redirectToSurvey() {
-          //router.push("/takesurvey");
+          router.push("/survey");
       },
       fetchCOVIDInfo() {
           console.log(localStorage.user)

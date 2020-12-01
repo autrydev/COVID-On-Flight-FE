@@ -8,6 +8,7 @@ import Dashboard from '../views/Dashboard.vue'
 import CovidInfo from '../views/CovidInfo.vue'
 import MyCovidStatus from '../views/MyCovidStatus.vue'
 import AccountSettings from '../views/AccountSettings.vue'
+import Survey from '../views/Survey.vue'
 
 
 Vue.use(VueRouter)
@@ -55,6 +56,11 @@ const routes = [
     path: '/accountsettings',
     name: 'AccountSettings',
     component: AccountSettings
+  },
+  {
+    path: '/survey',
+    name: 'survey',
+    component: Survey
   }
 ]
 
