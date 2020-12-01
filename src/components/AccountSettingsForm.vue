@@ -108,12 +108,6 @@ export default {
     openForm() {
       this.responsive = true;
     },
-    updateSettings() {
-      if (this.$refs.form.validate() === true) {
-        this.responsive = false;
-        //submit changes
-      }
-    },
     cancelChanges() {
       this.responsive = false;
       this.fetchAccountInfo();
@@ -137,23 +131,26 @@ export default {
             })
     },
     updateAccountInfo() {
-      axios.post('/accountsettings', {
-          id: localStorage.user,
-          first_name: this.firstName,
-          last_name: this.lastName,
-          email: this.email,
-          phone_number: this.phoneNumber,
-      })
-      .then(response => {
-          this.firstName = response.data["firstName"]
-          this.lastName = response.data["lastName"]
-          this.email = response.data["email"]
-          this.phoneNumber = response.data["phoneNumber"]
-          window.location.reload()
-      })
-      .catch(e => {
-          console.log(e)
-      })
+      if (this.$refs.form.validate() === true) {
+          this.responsive = false;
+          axios.post('/accountsettings', {
+              id: localStorage.user,
+              first_name: this.firstName,
+              last_name: this.lastName,
+              email: this.email,
+              phone_number: this.phoneNumber,
+          })
+          .then(response => {
+              this.firstName = response.data["firstName"]
+              this.lastName = response.data["lastName"]
+              this.email = response.data["email"]
+              this.phoneNumber = response.data["phoneNumber"]
+              window.location.reload()
+          })
+          .catch(e => {
+              console.log(e)
+          })
+      }
     }
   },
   beforeMount() {
