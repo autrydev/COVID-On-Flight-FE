@@ -97,7 +97,7 @@
                 </v-form>
                 <v-row id="copyright">
                     <v-col>
-                        <p>Copyright &#169; AwesomeBand 2020</p>
+                        <p>Copyright &#169; AwesomeBand {{ new Date().getFullYear() }}</p>
                     </v-col>
                 </v-row>
             </v-container>
