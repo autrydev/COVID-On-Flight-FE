@@ -7,8 +7,9 @@
             :headers="headers"
             :items="future_flights"
             hide-default-footer
+            dense
             class="elevation-1"
-            no-data-text="No flights taken"
+            no-data-text="No flights scheduled"
             ></v-data-table>
         </v-card>
         <v-card class="flighttables">
@@ -17,6 +18,7 @@
             :headers="headers"
             :items="prev_flights"
             hide-default-footer
+            dense
             class="elevation-1"
             no-data-text="No flights taken"
             ></v-data-table>
