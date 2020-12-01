@@ -1,6 +1,8 @@
 <template>
     <v-container class="surveypage">
+        <SurveyHeader />
         <SurveyForm />
+        <app-footer></app-footer>
     </v-container>
 </template>
 
