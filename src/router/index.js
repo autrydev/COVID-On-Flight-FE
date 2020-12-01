@@ -8,6 +8,7 @@ import Dashboard from '../views/Dashboard.vue'
 import CovidInfo from '../views/CovidInfo.vue'
 import MyCovidStatus from '../views/MyCovidStatus.vue'
 import AccountSettings from '../views/AccountSettings.vue'
+import ForgotPassword from '../views/ForgotPass.vue'
 
 
 Vue.use(VueRouter)
@@ -55,7 +56,12 @@ const routes = [
     path: '/accountsettings',
     name: 'AccountSettings',
     component: AccountSettings
-  }
+  },
+  {
+    path: '/forgot-password',
+    name: 'ForgotPassword',
+    component: ForgotPassword
+  },
 ]
 
 const router = new VueRouter({

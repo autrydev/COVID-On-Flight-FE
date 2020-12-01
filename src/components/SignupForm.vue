@@ -140,6 +140,11 @@
         signup_error: false,
         submitted: false,
     }),
+
+    created () {
+        localStorage.clear()
+    },
+
     methods: {
         checkPasswords() {
             return this.password1 === this.password2 || 'Passwords must match';
