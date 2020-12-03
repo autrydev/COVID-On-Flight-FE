@@ -1,25 +1,23 @@
 <template>
     <v-container id="survey-component">
-      <v-form v-model="valid" ref="form">
+      <v-form ref="form">
         <ul id="survey-questions"> 
             <li v-for="(symptom, i) in symptoms" :key="i">
                 <v-row>
-                    <v-col
-                    >
+                    <v-col>
                         {{ symptom.text }}
                     </v-col>
                         <v-radio-group
-                        v-model="row"
+                        v-model="symptom.value"
                         row
-                        mandatory
                         >
                         <v-radio
+                            :value="true"
                             label="Yes"
-                            value=""
                         ></v-radio>
                         <v-radio
+                            :value="false"
                             label="No"
-                            value=""
                         ></v-radio>
                         </v-radio-group>
                 </v-row>
@@ -37,11 +35,10 @@
 </template>
 
 <script>
-//import axios from 'axios'
+import axios from 'axios'
 
 export default {
   data: () => ({
-    valid: false,
     symptoms: [
         { text: "Fever or chills", value: null },
         { text: "Cough", value: null },
@@ -55,28 +52,56 @@ export default {
         { text: "Nausea or vomiting", value: null },
         { text: "Diarrhea", value: null },
     ],
+    symptomVals: {
+        fever_chills: null,
+        cough: null,
+        breathing_issues: null,
+        fatigue: null,
+        aches: null,
+        headaches: null,
+        loss_taste_smell: null,
+        sore_throat: null,
+        congestion: null ,
+        nausea: null,
+        diarrhea: null,
+    }
   }),
   methods: {
+    getSymptomValues() {
+        let i = 0
+        for(let symptom in this.symptomVals) {
+            this.symptomVals[symptom] = this.symptoms[i].value
+            i++
+        }
+    },
     updateCovidStatus() {
-        /*if (this.$refs.form.validate() === true) {
+        this.getSymptomValues()
+        if (this.validateForm()) {
             axios.post('/updatecovidstatus', {
                 id: localStorage.user,
-                first_name: this.firstName,
-                last_name: this.lastName,
-                email: this.email,
-                phone_number: this.phoneNumber,
+                symptoms: this.symptomVals,
             })
             .then(response => {
-                this.firstName = response.data["firstName"]
-                this.lastName = response.data["lastName"]
-                this.email = response.data["email"]
-                this.phoneNumber = response.data["phoneNumber"]
+                console.log(response)
                 window.location.reload()
             })
             .catch(e => {
                 console.log(e)
             })
-        }*/
+        }
+        else {
+            console.log('this is not filled')
+        }
+    },
+    validateForm() {
+        let valid = true;
+        for(let symptom in this.symptomVals) {
+            if(this.symptomVals[symptom] === null) {
+                valid = false
+                return valid
+            }
+        }
+        return valid
     }
   },
 };
