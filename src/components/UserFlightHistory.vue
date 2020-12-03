@@ -293,7 +293,18 @@ export default {
             })
         },
         registerFlight() {
-            console.log(2)
+            /*axios.post('/dashboard', {
+                id: localStorage.user,
+                flight_info: this.flightInformation,
+            })
+            .then(response => {
+            // JSON responses are automatically parsed.
+                this.fetchFlights()
+            })
+            .catch(e => {
+                console.log(e)
+            })*/
+            console.log("This button is working")
         },
         close () {
             this.dialog = false
