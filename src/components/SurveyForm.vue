@@ -36,6 +36,7 @@
 
 <script>
 import axios from 'axios'
+import router from '../router'
 
 export default {
   data: () => ({
@@ -52,38 +53,28 @@ export default {
         { text: "Nausea or vomiting", value: null },
         { text: "Diarrhea", value: null },
     ],
-    symptomVals: {
-        fever_chills: null,
-        cough: null,
-        breathing_issues: null,
-        fatigue: null,
-        aches: null,
-        headaches: null,
-        loss_taste_smell: null,
-        sore_throat: null,
-        congestion: null ,
-        nausea: null,
-        diarrhea: null,
-    }
   }),
   methods: {
-    getSymptomValues() {
-        let i = 0
-        for(let symptom in this.symptomVals) {
-            this.symptomVals[symptom] = this.symptoms[i].value
-            i++
-        }
-    },
     updateCovidStatus() {
-        this.getSymptomValues()
+        let data = {
+            id: localStorage.user,
+            fever_chills: this.symptoms[0].value,
+            cough: this.symptoms[1].value,
+            breathing_issues: this.symptoms[2].value,
+            fatigue: this.symptoms[3].value,
+            aches: this.symptoms[4].value,
+            headache: this.symptoms[5].value,
+            loss_taste_smell: this.symptoms[6].value,
+            sore_throat: this.symptoms[7].value,
+            congestion: this.symptoms[8].value,
+            nausea: this.symptoms[9].value,
+            diarrhea: this.symptoms[10].value,
+        }  
         if (this.validateForm()) {
-            axios.post('/updatecovidstatus', {
-                id: localStorage.user,
-                symptoms: this.symptomVals,
-            })
+            axios.post('/updatecovidstatus', data)
             .then(response => {
                 console.log(response)
-                window.location.reload()
+                router.push('mycovidstatus')
             })
             .catch(e => {
                 console.log(e)
@@ -95,8 +86,8 @@ export default {
     },
     validateForm() {
         let valid = true;
-        for(let symptom in this.symptomVals) {
-            if(this.symptomVals[symptom] === null) {
+        for(let i in this.symptoms) {
+            if(this.symptoms[i].value === null) {
                 valid = false
                 return valid
             }

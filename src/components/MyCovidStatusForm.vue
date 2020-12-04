@@ -65,13 +65,11 @@
           router.push("/survey");
       },
       fetchCOVIDInfo() {
-          console.log(localStorage.user)
           axios.post('/covidstatus', {
               id: localStorage.user,
           })
           .then(response => {
             // JSON responses are automatically parsed.
-            console.log(response.data)
             this.currentStatus = response.data["covidstatus"]
             if(response.data["lastupdate"] == null || response.data["lastupdate"] == "" || response.data["lastupdate"] == "None") 
                 { this.lastUpdated = "N/A" }
