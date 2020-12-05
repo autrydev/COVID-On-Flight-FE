@@ -293,7 +293,6 @@ export default {
         registerFlight() {
             let data = Object.assign({}, this.flightInformation)
             data['id'] = localStorage.user
-            this.clearForm()
             /*axios.post('/dashboard', data)
             .then(response => {
             // JSON responses are automatically parsed.
