@@ -206,7 +206,7 @@
                             @click="registerFlight()"
                             v-on:click="close"
                         >
-                            Search
+                            Register
                         </v-btn>
                         </v-card-actions>
                     </v-card>
@@ -260,8 +260,6 @@ export default {
             to_date: null,
             departure_city: null,
             arrival_city: null,
-            departure_time: null,
-            arrival_time: null,
         },
         dialog: false,
         dialogDelete: false,
@@ -293,18 +291,18 @@ export default {
             })
         },
         registerFlight() {
-            /*axios.post('/dashboard', {
-                id: localStorage.user,
-                flight_info: this.flightInformation,
-            })
+            let data = Object.assign({}, this.flightInformation)
+            data['id'] = localStorage.user
+            this.clearForm()
+            /*axios.post('/dashboard', data)
             .then(response => {
             // JSON responses are automatically parsed.
+                this.clearForm()
                 this.fetchFlights()
             })
             .catch(e => {
                 console.log(e)
             })*/
-            console.log("This button is working")
         },
         close () {
             this.dialog = false
@@ -313,6 +311,14 @@ export default {
             this.editedIndex = -1
             })
         },
+        clearForm() {
+            this.flightInformation.reservation_number = null
+            this.flightInformation.flight_id = null
+            this.flightInformation.from_date = null
+            this.flightInformation.to_date = null
+            this.flightInformation.departure_city = null
+            this.flightInformation.arrival_city = null
+        }
         
     },
     beforeMount() {
