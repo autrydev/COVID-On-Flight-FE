@@ -1,6 +1,21 @@
 <template>
     <v-container>
         <h1>Hello {{ firstname }}!</h1>
+
+        <v-alert v-if="update_status"
+            prominent
+            type="error"
+            >
+            <v-row align="center">
+                <v-col class="grow">
+                You have not recently updated your COVID Status. Please update it immediately!
+                </v-col>
+                <v-col class="shrink">
+                <v-btn>Update COVID Status</v-btn>
+                </v-col>
+            </v-row>
+            </v-alert>
+
         <v-card class="flighttables">
             <h2> Future Flights </h2>
             <v-data-table
@@ -44,7 +59,8 @@ export default {
           { text: 'COVID Status', value: 'status' },
         ],
         prev_flights: [],
-        future_flights: []
+        future_flights: [],
+        update_status: false
     }),
 
     created () {
@@ -57,6 +73,7 @@ export default {
             this.firstname = response.data.firstname
             this.prev_flights = response.data.prev_flights
             this.future_flights = response.data.future_flights
+            this.update_status = response.data.update_status
         })
         .catch(e => {
             console.log(e)
