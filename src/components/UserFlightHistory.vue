@@ -187,6 +187,18 @@
                                         required
                                         ></v-text-field>
                                     </v-col>
+                                    <v-col
+                                        cols="12"
+                                        sm="6"
+                                        md="6"
+                                    >
+                                        <v-text-field
+                                        v-model="flightInformation.seat"
+                                        label="Seat Number"
+                                        clearable
+                                        required
+                                        ></v-text-field>
+                                    </v-col>
                                 </v-row>
                             </v-form>
                         </v-container>
@@ -255,6 +267,7 @@ export default {
         menu2: false,
         flightInformation: {
             reservation_number: null,
+            seat: null,
             flight_id: null,
             from_date: null,
             to_date: null,
