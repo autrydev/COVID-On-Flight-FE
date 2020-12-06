@@ -306,15 +306,17 @@ export default {
         registerFlight() {
             let data = Object.assign({}, this.flightInformation)
             data['id'] = localStorage.user
-            /*axios.post('/dashboard', data)
+            //validate that all fields are filled out
+            axios.post('/registerflight', data)
             .then(response => {
             // JSON responses are automatically parsed.
                 this.clearForm()
                 this.fetchFlights()
+                console.log(response)
             })
             .catch(e => {
                 console.log(e)
-            })*/
+            })
         },
         close () {
             this.dialog = false
