@@ -1,6 +1,21 @@
 <template>
     <v-container>
         <h1>Hello {{ firstname }}!</h1>
+
+        <v-alert v-if="update_status"
+            prominent
+            type="error"
+            >
+            <v-row align="center">
+                <v-col class="grow">
+                You have not recently updated your COVID Status. Please update it immediately!
+                </v-col>
+                <v-col class="shrink">
+                <v-btn @click="sendToUpdate()">Update COVID Status</v-btn>
+                </v-col>
+            </v-row>
+            </v-alert>
+
         <v-card class="flighttables">
             <v-data-table
                 :headers="headers"
@@ -244,6 +259,7 @@
 </template>
 
 <script>
+import router from '../router'
 import axios from 'axios'
 
 export default {
@@ -263,6 +279,7 @@ export default {
         ],
         prev_flights: [],
         future_flights: [],
+        update_status:false,
         menu1: false,
         menu2: false,
         flightInformation: {
@@ -298,6 +315,7 @@ export default {
                 this.firstname = response.data.firstname
                 this.prev_flights = response.data.prev_flights
                 this.future_flights = response.data.future_flights
+                this.update_status = response.data.update_status
             })
             .catch(e => {
                 console.log(e)
@@ -332,6 +350,9 @@ export default {
             this.flightInformation.to_date = null
             this.flightInformation.departure_city = null
             this.flightInformation.arrival_city = null
+        },
+        sendToUpdate() {
+            router.push('mycovidstatus')
         }
         
     },

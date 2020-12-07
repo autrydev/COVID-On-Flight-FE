@@ -102,7 +102,8 @@ export default {
             .then(response => {
             // JSON responses are automatically parsed.
             console.log(response.status)
-                localStorage.user = response.data
+                localStorage.user = response.data.id
+                localStorage.admin = response.data.staff_status
                 router.push('dashboard')
             })
             .catch(e => {
