@@ -63,10 +63,11 @@ const routes = [
     name: 'survey',
     component: Survey
   },
+  {
     path: '/forgot-password',
     name: 'ForgotPassword',
     component: ForgotPassword
-  },
+  }
 ]
 
 const router = new VueRouter({
