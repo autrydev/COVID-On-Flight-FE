@@ -51,6 +51,8 @@
 
 <script>
   import axios from 'axios'
+  import router from '../router'
+  
   export default {
     data: () => ({
       valid: false,
@@ -60,25 +62,22 @@
     }),
     methods: {
       redirectToSurvey() {
-          //router.push("/takesurvey");
+          router.push("/survey");
       },
       fetchCOVIDInfo() {
-          console.log(localStorage.user)
           axios.post('/covidstatus', {
               id: localStorage.user,
-              requestType: "fetch"
           })
           .then(response => {
             // JSON responses are automatically parsed.
-            console.log(response.data)
             this.currentStatus = response.data["covidstatus"]
-            if(response.data["lastupdate"] == null) {
-                 this.lastUpdated = "N/A"
-            }
-            else {
-                this.lastUpdated = response.data["lastupdate"]
-            }
-            this.lastFlight = response.data["lastflight"]
+            if(response.data["lastupdate"] == null || response.data["lastupdate"] == "" || response.data["lastupdate"] == "None") 
+                { this.lastUpdated = "N/A" }
+            else { this.lastUpdated = response.data["lastupdate"] }
+            
+            if(response.data["lastflight"] == null || response.data["lastflight"] == "" || response.data["lastflight"] == "None")
+                { this.lastFlight = "N/A" }
+            else { this.lastFlight = response.data["lastflight"] }
           })
           .catch(e => {
               console.log(e)

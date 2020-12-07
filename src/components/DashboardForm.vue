@@ -1,15 +1,18 @@
 <template>
     <div>
-        <TestForm></TestForm>
+        <AuthGuard></AuthGuard>
+        <DashboardHeader></DashboardHeader>
+        <app-footer></app-footer>
     </div>
 </template>
 <script>
-import TestForm from './TestForm'
+import AuthGuard from './AuthGuard'
+import AppFooter from './AppFooter'
+//import DashboardHeader from './DashboardHeader'
+//import TestForm from './TestForm'
 
 export default {
-    components:{
-        TestForm
-    }
+    components:{AuthGuard,AppFooter/*,DashboardHeader,/*,TestForm*/}
 }
 </script>
 
