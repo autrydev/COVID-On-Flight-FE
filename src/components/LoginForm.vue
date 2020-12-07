@@ -2,7 +2,7 @@
     <div>
         <v-container id="loginform">
             <div>
-                <h1>COVID On-Flight</h1>
+                <h1>COVID On Flight</h1>
             </div>
             <v-form v-model="valid">
                 <v-row>
