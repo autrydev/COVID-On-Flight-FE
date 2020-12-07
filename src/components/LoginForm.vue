@@ -58,7 +58,7 @@
             </v-form>
             <v-row id="copyright">
                 <v-col>
-                    <p>Copyright &#169; AwesomeBand 2020</p>
+                    <p>Copyright &#169; AwesomeBand {{ new Date().getFullYear() }}</p>
                 </v-col>
             </v-row>
         </v-container>
@@ -87,6 +87,11 @@ export default {
         login_error: false,
         submitted: false,
     }),
+
+    created () {
+        localStorage.clear()
+    },
+
     methods: {
         login: function() {
             this.submitted = true;

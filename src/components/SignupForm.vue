@@ -97,7 +97,7 @@
                 </v-form>
                 <v-row id="copyright">
                     <v-col>
-                        <p>Copyright &#169; AwesomeBand 2020</p>
+                        <p>Copyright &#169; AwesomeBand {{ new Date().getFullYear() }}</p>
                     </v-col>
                 </v-row>
             </v-container>
@@ -140,6 +140,11 @@
         signup_error: false,
         submitted: false,
     }),
+
+    created () {
+        localStorage.clear()
+    },
+
     methods: {
         checkPasswords() {
             return this.password1 === this.password2 || 'Passwords must match';
