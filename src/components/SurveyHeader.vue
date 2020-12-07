@@ -2,8 +2,7 @@
 
  <v-toolbar color = "indigo" dark>
 
-    <v-toolbar-title class="white--text">COVID-19 Information</v-toolbar-title>
-
+    <v-toolbar-title class="white--text">My COVID-19 Survey</v-toolbar-title>
     <v-spacer></v-spacer>
 
     <v-btn to="/dashboard" x-large outlined>Dashboard<v-icon>mdi-history</v-icon></v-btn>

@@ -8,6 +8,7 @@ import Dashboard from '../views/Dashboard.vue'
 import CovidInfo from '../views/CovidInfo.vue'
 import MyCovidStatus from '../views/MyCovidStatus.vue'
 import AccountSettings from '../views/AccountSettings.vue'
+import Survey from '../views/Survey.vue'
 import ForgotPassword from '../views/ForgotPass.vue'
 
 
@@ -58,10 +59,15 @@ const routes = [
     component: AccountSettings
   },
   {
+    path: '/survey',
+    name: 'survey',
+    component: Survey
+  },
+  {
     path: '/forgot-password',
     name: 'ForgotPassword',
     component: ForgotPassword
-  },
+  }
 ]
 
 const router = new VueRouter({
