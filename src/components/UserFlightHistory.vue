@@ -278,25 +278,7 @@ export default {
         ],
         prev_flights: [],
         future_flights: [],
-        update_status: false
-    }),
-
-    created () {
-        axios.post('/dashboard', {
-            id: localStorage.user
-        })
-        .then(response => {
-        // JSON responses are automatically parsed.
-        console.log(response.status)
-            this.firstname = response.data.firstname
-            this.prev_flights = response.data.prev_flights
-            this.future_flights = response.data.future_flights
-            this.update_status = response.data.update_status
-        })
-        .catch(e => {
-            console.log(e)
-        })
-    }
+        update_status:false,
         menu1: false,
         menu2: false,
         flightInformation: {
@@ -332,6 +314,7 @@ export default {
                 this.firstname = response.data.firstname
                 this.prev_flights = response.data.prev_flights
                 this.future_flights = response.data.future_flights
+                this.update_status = response.data.update_status
             })
             .catch(e => {
                 console.log(e)
