@@ -65,7 +65,7 @@
                                             <template v-slot:activator="{ on, attrs }">
                                               <v-text-field
                                                 v-model="searchParameters.from_date"
-                                                label="Departure Date"
+                                                label="From Date"
                                                 prepend-icon="mdi-calendar"
                                                 readonly
                                                 v-bind="attrs"
@@ -113,7 +113,7 @@
                                             <template v-slot:activator="{ on, attrs }">
                                               <v-text-field
                                                 v-model="searchParameters.to_date"
-                                                label="Arrival Date"
+                                                label="To Date"
                                                 prepend-icon="mdi-calendar"
                                                 readonly
                                                 v-bind="attrs"
