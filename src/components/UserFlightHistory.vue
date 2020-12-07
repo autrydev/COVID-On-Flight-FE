@@ -11,7 +11,7 @@
                 You have not recently updated your COVID Status. Please update it immediately!
                 </v-col>
                 <v-col class="shrink">
-                <v-btn>Update COVID Status</v-btn>
+                <v-btn @click="sendToUpdate()">Update COVID Status</v-btn>
                 </v-col>
             </v-row>
             </v-alert>
@@ -349,6 +349,9 @@ export default {
             this.flightInformation.to_date = null
             this.flightInformation.departure_city = null
             this.flightInformation.arrival_city = null
+        },
+        sendToUpdate() {
+            router.push('mycovidstatus')
         }
         
     },
