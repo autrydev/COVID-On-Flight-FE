@@ -123,7 +123,8 @@ export default {
     },
     fetchAccountInfo() {
       axios.post('/accountsettings', {
-                id: localStorage.user
+                id: localStorage.user,
+                requestType: "fetch"
             })
             .then(response => {
               // JSON responses are automatically parsed.
@@ -135,6 +136,22 @@ export default {
             .catch(e => {
                 console.log(e)
             })
+    },
+    updateAccountInfo() {
+      axios.post('/updateaccountsettings', {
+          first_name: this.firstName,
+          last_name: this.lastName,
+          email: this.email,
+          phone_number: this.phoneNumber,
+      })
+      .then(response => {
+          if(response.status == 200) {
+            //show notification of success
+          }
+      })
+      .catch(e => {
+          console.log(e)
+      })
     }
   },
   beforeMount() {

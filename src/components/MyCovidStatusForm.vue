@@ -10,7 +10,6 @@
             <v-text-field
               v-model="currentStatus"
               :dark="false"
-              placeholder="FETCH_CURRENT_STATUS"
               outlined
             ></v-text-field>
           </v-col>
@@ -21,9 +20,8 @@
           </v-col>
           <v-col cols="6" class="text-box">
             <v-text-field
-              v-model="date_lastUpdate"
+              v-model="lastUpdated"
               :dark="false"
-              placeholder="FETCH_LAST_NAME"
               outlined
             ></v-text-field>
           </v-col>
@@ -34,16 +32,15 @@
           </v-col>
           <v-col cols="6" class="text-box">
             <v-text-field
-              v-model="date_lastFlight"
+              v-model="lastFlight"
               :dark="false"
-              placeholder="FETCH_EMAIL"
               outlined
             ></v-text-field>
           </v-col>
         </v-row>
         <v-row>
           <v-col>
-            <v-btn :dark="true" id="update-status" @click="redirect()">Update My Status</v-btn>
+            <v-btn :dark="true" id="update-status" @click="redirectToSurvey()">Update My Status</v-btn>
           </v-col>
         </v-row>
       </v-form>
@@ -53,16 +50,43 @@
 
 
 <script>
-
+  import axios from 'axios'
   export default {
-
     data: () => ({
-        valid: false,
+      valid: false,
+      currentStatus: "",
+      lastUpdated: "",
+      lastFlight: "",
     }),
     methods: {
-        redirect() {
-            //router.push("/takesurvey");
-        }
+      redirectToSurvey() {
+          //router.push("/takesurvey");
+      },
+      fetchCOVIDInfo() {
+          console.log(localStorage.user)
+          axios.post('/covidstatus', {
+              id: localStorage.user,
+              requestType: "fetch"
+          })
+          .then(response => {
+            // JSON responses are automatically parsed.
+            console.log(response.data)
+            this.currentStatus = response.data["covidstatus"]
+            if(response.data["lastupdate"] == null) {
+                 this.lastUpdated = "N/A"
+            }
+            else {
+                this.lastUpdated = response.data["lastupdate"]
+            }
+            this.lastFlight = response.data["lastflight"]
+          })
+          .catch(e => {
+              console.log(e)
+          })
+      }
+    },
+    beforeMount() {
+      this.fetchCOVIDInfo();
     }
   };
 </script>
