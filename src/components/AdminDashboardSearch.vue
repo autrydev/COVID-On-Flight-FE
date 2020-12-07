@@ -222,36 +222,7 @@
                             </v-card-actions>
                         </v-card>
                         </v-dialog>
-                        <v-dialog v-model="dialogDelete" max-width="500px">
-                        <v-card>
-                            <v-card-title class="headline">Are you sure you want to delete this item?</v-card-title>
-                            <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                            <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
-                            <v-spacer></v-spacer>
-                            </v-card-actions>
-                        </v-card>
-                        </v-dialog>
                     </v-toolbar>
-                    </template>
-                    <template v-slot:item.actions="{ item }">
-                    <v-icon
-                        small
-                        class="mr-2"
-                        @click="editItem(item)"
-                    >
-                        mdi-pencil
-                    </v-icon>
-                    <v-icon
-                        small
-                        @click="deleteItem(item)"
-                    >
-                        mdi-delete
-                    </v-icon>
-                    </template>
-                    <template v-slot:no-data>
-                        Search for flights!
                     </template>
                 </v-data-table>
             </v-card>
@@ -294,24 +265,7 @@ export default {
             { text: 'Departure City', value: 'departureCity' },
             { text: 'Arrival City', value: 'arrivalCity' },
             { text: 'COVID Count', value: 'covidCount' },
-            { text: 'Actions', value: 'actions' },
         ],
-        /*desserts: [],
-        editedIndex: -1,
-        editedItem: {
-            name: '',
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0,
-        },
-        defaultItem: {
-            name: '',
-            calories: 0,
-            fat: 0,
-            carbs: 0,
-            protein: 0,
-        },*/
     }),
     watch: {
       dialog (val) {
@@ -337,37 +291,14 @@ export default {
       },
       searchFlights() {
         this.formatOptions()
-        console.log(this.searchParameters.from_date)
-        console.log(this.searchParameters.to_date)
-        console.log(this.searchParameters.departure_city)
-        console.log(this.searchParameters.arrival_city)
-        console.log(this.searchParameters.flight_id)
-        console.log(this.searchParameters.covidStatus)
         axios.post('/adminflightsearch', this.searchParameters)
             .then(response => {
-                console.log(response.data)
                 this.flights = response.data["flights"]
-                /*for(const flight of this.flights) {
-                }*/
             })
             .catch(e => {
                 console.log(e)
             })
       },
-      /*editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
-      deleteItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialogDelete = true
-      },
-      deleteItemConfirm () {
-        this.desserts.splice(this.editedIndex, 1)
-        this.closeDelete()
-      },*/
       close () {
         this.dialog = false
         this.$nextTick(() => {
@@ -375,21 +306,6 @@ export default {
           this.editedIndex = -1
         })
       },
-      /*closeDelete () {
-        this.dialogDelete = false
-        this.$nextTick(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        })
-      },
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
-        } else {
-          this.desserts.push(this.editedItem)
-        }
-        this.close()
-      },*/
     },
 }
 </script>
