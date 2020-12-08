@@ -2,7 +2,7 @@
     <div>
         <v-container id="loginform">
             <div>
-                <h1>COVID On-Flight</h1>
+                <h1>COVID On Flight</h1>
             </div>
             <v-form v-model="valid">
                 <v-row>
@@ -58,7 +58,7 @@
             </v-form>
             <v-row id="copyright">
                 <v-col>
-                    <p>Copyright &#169; AwesomeBand 2020</p>
+                    <p>Copyright &#169; AwesomeBand {{ new Date().getFullYear() }}</p>
                 </v-col>
             </v-row>
         </v-container>
@@ -87,6 +87,11 @@ export default {
         login_error: false,
         submitted: false,
     }),
+
+    created () {
+        localStorage.clear()
+    },
+
     methods: {
         login: function() {
             this.submitted = true;
@@ -97,7 +102,8 @@ export default {
             .then(response => {
             // JSON responses are automatically parsed.
             console.log(response.status)
-                localStorage.user = response.data
+                localStorage.user = response.data.id
+                localStorage.admin = response.data.staff_status
                 router.push('dashboard')
             })
             .catch(e => {
