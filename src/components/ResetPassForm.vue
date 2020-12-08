@@ -313,7 +313,7 @@ h3 {
     width: 100%;
     height: 4em;
     margin-bottom: 1em;
-    background-color: #073da1;
+    background-color: #2196f3;
     color:white;
 }
 p {

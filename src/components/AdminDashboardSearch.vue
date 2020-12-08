@@ -20,7 +20,7 @@
                         >
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn
-                            color="primary"
+                            color="#2196f3"
                             dark
                             class="mb-2"
                             v-bind="attrs"
@@ -31,7 +31,7 @@
                         </template>
                         <v-card>
                             <v-card-title>
-                            <span class="headline">Search by flight information</span>
+                            <span class="headline">Search by Flight Details</span>
                             </v-card-title>
 
                             <v-card-text>

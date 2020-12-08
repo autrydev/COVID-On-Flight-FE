@@ -1,12 +1,12 @@
 <template >
   <v-footer
-    color="primary lighten-1"
+    color="#0069c0"
     padless
     app
   >
     <v-row>
       <v-col
-        class="primary lighten-2 py-4 text-center white--text"
+        class="#0069c0 py-4 text-center white--text"
         cols="12"
       >
         <p>Copyright &#169; AwesomeBand {{ new Date().getFullYear() }}</p>

@@ -1,4 +1,5 @@
 <template>
+<v-card>
     <v-container id="survey-component">
       <v-form ref="form">
         <ul id="survey-questions"> 
@@ -32,6 +33,7 @@
         </v-row>
       </v-form>
     </v-container>
+</v-card>
 </template>
 
 <script>
@@ -99,19 +101,17 @@ export default {
 </script>
 
 <style scoped>
-    #survey-card {
-    }
     #survey-questions {
         list-style-type: none;
     }
     #survey-component {
-        margin-top: 5%;
+        margin-top: 10px;
         width: min(50%, 500px);
     }
     #update-symptoms {
         width: 100%;
         height: 4em;
         margin-bottom: 1em;
-        background-color: #006600;
+        background-color: #2196f3;
     }
 </style>

@@ -1,6 +1,8 @@
 <template>
     <v-container>
-        <h1>Hello {{ firstname }}!</h1>
+        <v-card class="text-center">
+            <h1>Hello {{ firstname }}!</h1>
+        </v-card>
 
         <v-alert v-if="update_status"
             prominent
@@ -38,7 +40,7 @@
                     >
                     <template v-slot:activator="{ on, attrs }">
                         <v-btn
-                        color="primary"
+                        color="#2196f3"
                         dark
                         class="mb-2"
                         v-bind="attrs"
@@ -49,7 +51,7 @@
                     </template>
                     <v-card>
                         <v-card-title>
-                        <span class="headline">Enter your flight information</span>
+                        <span class="headline">Enter your Flight Details</span>
                         </v-card-title>
 
                         <v-card-text>

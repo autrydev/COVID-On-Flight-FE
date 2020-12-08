@@ -1,67 +1,69 @@
 <template>
     <div>
-        <v-container id="loginform">
-            <div>
-                <h1>COVID On Flight</h1>
-            </div>
-            <v-form v-model="valid">
-                <v-row>
-                    <v-text-field
-                    v-model="email"
+        <v-card id="logincard" :elevation="10">        
+            <v-container id="loginform">
+                <div>
+                    <h1>COVID On Flight</h1>
+                </div>
+                <v-form v-model="valid">
+                    <v-row>
+                        <v-text-field
+                        v-model="email"
+                        :dark="false"
+                        :rules="emailRules"
+                        label="Email Address *"
+                        outlined
+                        required
+                        @keydown.enter="login"
+                        ></v-text-field>
+                    </v-row>
+                    <v-row>
+                        <v-text-field
+                        v-model="password"
+                        :dark="false"
+                        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                        :rules="passRules"
+                        :type="show1 ? 'text' : 'password'"
+                        label="Password *"
+                        outlined
+                        required
+                        @click:append="show1 = !show1"
+                        @keydown.enter="login"
+                        ></v-text-field>
+                    </v-row>
+                    <v-row id="status" v-if="login_error">
+                        <v-col>
+                            <p id="loginmessage">{{login_message}}</p>
+                        </v-col>
+                    </v-row>
+                    <v-row>
+                    <v-btn
+                    v-on:click="login"
                     :dark="false"
-                    :rules="emailRules"
-                    label="Email Address *"
-                    outlined
-                    required
-                    @keydown.enter="login"
-                    ></v-text-field>
-                </v-row>
-                <v-row>
-                    <v-text-field
-                    v-model="password"
-                    :dark="false"
-                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                    :rules="passRules"
-                    :type="show1 ? 'text' : 'password'"
-                    label="Password *"
-                    outlined
-                    required
-                    @click:append="show1 = !show1"
-                    @keydown.enter="login"
-                    ></v-text-field>
-                </v-row>
-                <v-row id="status" v-if="login_error">
+                    :disabled="!valid"
+                    :loading="submitted"
+                    id="btn-signin"
+                    @click="validate"
+                    >
+                    SIGN IN
+                    </v-btn>
+                    </v-row>
+                    <v-row>
+                        <v-col>
+                        <router-link to="/forgot-password">Forgot Password?</router-link>
+                        </v-col>
+                        <v-col cols=auto>
+                        <router-link to="/signup">Don't have an account? Sign Up</router-link>
+                        </v-col>
+                    </v-row>
+                </v-form>
+                <v-row id="copyright">
                     <v-col>
-                        <p id="loginmessage">{{login_message}}</p>
+                        <p>Copyright &#169; AwesomeBand {{ new Date().getFullYear() }}</p>
                     </v-col>
                 </v-row>
-                <v-row>
-                <v-btn
-                v-on:click="login"
-                :dark="false"
-                :disabled="!valid"
-                :loading="submitted"
-                id="btn-signin"
-                @click="validate"
-                >
-                SIGN IN
-                </v-btn>
-                </v-row>
-                <v-row>
-                    <v-col>
-                    <router-link to="/forgot-password">Forgot Password?</router-link>
-                    </v-col>
-                    <v-col cols=auto>
-                    <router-link to="/signup">Don't have an account? Sign Up</router-link>
-                    </v-col>
-                </v-row>
-            </v-form>
-            <v-row id="copyright">
-                <v-col>
-                    <p>Copyright &#169; AwesomeBand {{ new Date().getFullYear() }}</p>
-                </v-col>
-            </v-row>
-        </v-container>
+            </v-container>
+        </v-card>
     </div>
 </template>
 
@@ -147,7 +149,7 @@ h1 {
     width: 100%;
     height: 4em;
     margin-bottom: 1em;
-    background-color: #073da1;
+    background-color: #2196f3;
     color:white;
 }
 p {

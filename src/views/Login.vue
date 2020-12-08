@@ -17,7 +17,6 @@ export default {
 
 <style scoped>
 .loginpage {
-    /** background-color: green; */
     color: black;
 }
 </style>

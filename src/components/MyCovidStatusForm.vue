@@ -1,5 +1,6 @@
 <template>
   <div id="container">
+    <v-card>
     <v-container id="status-form">
       <v-form v-model="valid" :readonly="true" ref="form">
         <v-row>
@@ -45,6 +46,7 @@
         </v-row>
       </v-form>
     </v-container>
+    </v-card>
   </div>
 </template>
 
@@ -99,6 +101,6 @@
   width: 100%;
   height: 4em;
   margin-bottom: 1em;
-  background-color: rgb(7, 61, 161);
+  background-color: #2196f3;
 }
 </style>

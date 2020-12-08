@@ -51,13 +51,13 @@ export default {
 
 <style scoped>
 #positivecard {
-    background-color: rgba(255, 0, 0, 0.8);
+    background-color: #f44336;
     color: white;
     width: 50%;
     margin-left: 25%;
 }
 #negativecard {
-    background-color: rgba(0, 0, 255, 0.8);
+    background-color: #0069c0;
     color: white;
     width: 50%;
     margin-left: 25%;

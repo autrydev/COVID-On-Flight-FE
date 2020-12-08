@@ -1,5 +1,6 @@
 <template>
   <div id="container">
+    <v-card>
     <v-container id="account-settings">
       <v-form v-model="valid" :readonly="!responsive" ref="form">
         <v-row>
@@ -77,6 +78,7 @@
         </v-row>
       </v-form>
     </v-container>
+    </v-card>
   </div>
 </template>
 
@@ -161,25 +163,25 @@ export default {
 
 <style scoped>
 #account-settings {
-  margin-top: 5%;
+  margin-top: 10px;
   width: min(50%, 500px);
 }
 #change-settings {
   width: 100%;
   height: 4em;
   margin-bottom: 1em;
-  background-color: rgb(7, 61, 161);
+  background-color: #2196f3;
 }
 #update-settings {
   width: 100%;
   height: 4em;
   margin-bottom: 1em;
-  background-color: #006600;
+  background-color:#0069c0;
 }
 #cancel-settings {
   width: 100%;
   height: 4em;
   margin-bottom: 1em;
-  background-color: rgb(141, 16, 16);
+  background-color: #f44336;
 }
 </style>

@@ -1,5 +1,6 @@
 <template>
     <div id="container">
+        <v-card>
             <v-container id="signup-form">
                 <div>
                     <h1>COVID On-Flight</h1>
@@ -101,6 +102,7 @@
                     </v-col>
                 </v-row>
             </v-container>
+        </v-card>
     </div>
 </template>
 
@@ -192,7 +194,7 @@ h1 {
     text-align: center;
     padding-bottom: 1em;
     /*color: rgb(219, 214, 214);*/
-    color: rgb(20, 19, 19)
+    color: rgb(20, 19, 19);
 }
 .text-field {
     padding: 0 0.5em;
@@ -212,7 +214,7 @@ h1 {
     width: 100%;
     height: 4em;
     margin-bottom: 1em;
-    background-color: rgb(255, 136, 0);
+    background-color: #2196f3;
     color: white;
 }
 p {

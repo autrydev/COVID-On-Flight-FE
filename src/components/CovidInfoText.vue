@@ -1,6 +1,6 @@
 <template>
   <div>
-  <p> </p>
+    <v-card style="padding-bottom: 5%; margin-top: 10px">
     <p class="font-weight-black text-center pa-md-5">
       Important Information About COVID-19
     </p>
@@ -49,9 +49,11 @@
       Learn more about COVID-19 and what you can do to protect yourself and others at the website for the
      </p>
 
-     <v-tabs centered="true">
-        <v-tab href="https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html">Center of Disease Control and Prevention</v-tab>
-        </v-tabs>
-
+    <v-row justify="center">
+      <v-btn class="centered" color="#f44336" href="https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html">Go To Center of Disease Control and Prevention Website</v-btn>
+    </v-row>
+    </v-card>
   </div>
 </template>
+
+style
