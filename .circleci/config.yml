@@ -4,8 +4,8 @@ jobs:
     docker:
       - image: 'cimg/node:14.14.0'
         auth:
-          username: autrydev
-          password: C0vid0nFlight
+          username: tardis1103@gmail.com
+          password: M8b8rak6
     steps:
       - checkout
       - run: node --version
@@ -13,7 +13,7 @@ jobs:
       - run: npm install @vue/cli-service-global
       - run: npm run build
       - run: npm install surge
-      - run: ./node_modules/surge/lib/cli.js ./dist --domain covidonflight.surge.sh
+      - run: ./node_modules/surge/lib/cli.js ./dist --domain naughty-attraction.surge.sh
 workflows:
   build_and_deploy:
     jobs:
